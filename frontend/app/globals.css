@@ -1,0 +1,793 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+/* ===========================================
+   PREMIUM LIGHT DESIGN TOKENS - Warm Paper
+   =========================================== */
+
+:root {
+  /* ===========================================
+     COLOR PALETTE - Warm Editorial Paper
+     =========================================== */
+   
+  /* Background System - Warm paper tone */
+  --color-bg: #F3F0EA;
+  --color-bg-secondary: #ECE8E0;
+  --color-bg-tertiary: #E6E1D7;
+  --color-bg-elevated: #FFFFFF;
+  
+  /* Surface System - For cards and elevated elements */
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FAFAFA;
+  
+  /* Text Hierarchy - Warm typography */
+  --color-text-primary: #22201D;
+  --color-text-secondary: #6F6A63;
+  --color-text-tertiary: #8A857D;
+  --color-text-muted: #A3A099;
+  --color-text-disabled: #C0BEB8;
+  
+  /* Accent Colors - Buttery Gold palette */
+  --color-primary: #D4A574;
+  --color-primary-hover: #E8C97A;
+  --color-primary-glow: #D4A574;
+  
+  --color-secondary: #C9A961;
+  --color-secondary-hover: #D4B86A;
+  
+  --color-accent-gold: #D4A574;
+  --color-accent-warm: #E8C97A;
+  
+  /* Status Colors */
+  --color-success: #34C759;
+  --color-warning: #FF9F0A;
+  --color-error: #FF453A;
+  
+  /* ===========================================
+     GLASSMORPHISM SYSTEM - Apple Liquid Glass
+     =========================================== */
+  
+  --glass-bg: rgba(255, 255, 255, 0.42);
+  --glass-bg-strong: rgba(255, 255, 255, 0.65);
+  --glass-bg-intense: rgba(255, 255, 255, 0.85);
+  
+  --glass-stroke: rgba(255, 255, 255, 0.65);
+  --glass-stroke-strong: rgba(255, 255, 255, 0.85);
+  --glass-stroke-accent: rgba(212, 165, 116, 0.8);
+  
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --glass-highlight-faint: rgba(255, 255, 255, 0.6);
+  
+  /* ===========================================
+     GRADIENT SYSTEM - Premium gradients
+     =========================================== */
+  
+  --gradient-primary: linear-gradient(120deg, #FFFFFF 10%, #F5E6D3 55%, #ECDCC8 90%);
+  --gradient-primary-reverse: linear-gradient(120deg, #ECDCC8 10%, #F5E6D3 55%, #FFFFFF 90%);
+  
+  --gradient-subtle: linear-gradient(160deg, rgba(212, 165, 116, 0.15), rgba(232, 201, 122, 0.1), rgba(255, 255, 255, 0));
+  --gradient-card: linear-gradient(165deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+  
+  --gradient-accent: linear-gradient(165deg, rgba(212, 165, 116, 0.3), rgba(232, 201, 122, 0.2));
+  
+  /* ===========================================
+     TYPOGRAPHY SCALE - Editorial sizing
+     =========================================== */
+  
+  --font-family-primary: 'Inter', system-ui, sans-serif;
+  --font-family-display: 'Space Grotesk', system-ui, sans-serif;
+  
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 3.75rem;
+  --font-size-7xl: 4.5rem;
+  
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  --line-height-tight: 1.1;
+  --line-height-snug: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.65;
+  
+  /* ===========================================
+     SPACING SYSTEM - Editorial rhythm
+     =========================================== */
+  
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 8rem;
+  
+  /* ===========================================
+     BORDER RADIUS - Soft, premium corners
+     =========================================== */
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-3xl: 48px;
+  --radius-full: 9999px;
+  
+  /* ===========================================
+     SHADOW SYSTEM - Soft depth
+     =========================================== */
+  
+  --shadow-xs: 0 1px 2px 0 rgba(45, 35, 20, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(45, 35, 20, 0.08), 0 1px 2px -1px rgba(45, 35, 20, 0.08);
+  --shadow-md: 0 4px 12px -2px rgba(45, 35, 20, 0.08), 0 2px 6px -3px rgba(45, 35, 20, 0.08);
+  --shadow-lg: 0 12px 24px -6px rgba(45, 35, 20, 0.12), 0 6px 12px -8px rgba(45, 35, 20, 0.12);
+  --shadow-xl: 0 24px 40px -12px rgba(45, 35, 20, 0.15), 0 12px 20px -16px rgba(45, 35, 20, 0.15);
+  
+  --shadow-glow-sm: 0 0 15px rgba(212, 165, 116, 0.2);
+  --shadow-glow-md: 0 0 25px rgba(212, 165, 116, 0.25), 0 0 45px rgba(232, 201, 122, 0.15);
+  --shadow-glow-lg: 0 0 35px rgba(212, 165, 116, 0.3), 0 0 65px rgba(232, 201, 122, 0.2);
+  
+  --shadow-inset-sm: inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+  --shadow-inset-md: inset 0 1px 0 0 rgba(255, 255, 255, 0.8), inset 0 -1px 0 0 rgba(45, 35, 20, 0.05);
+  
+  /* ===========================================
+     TRANSITION & EASING - Premium motion
+     =========================================== */
+  
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-linear: linear;
+  --ease-luxury: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-luxury: 700ms;
+  
+  /* ===========================================
+     BLUR VALUES - Glass morphism
+     =========================================== */
+  
+  --blur-xs: 4px;
+  --blur-sm: 8px;
+  --blur-md: 12px;
+  --blur-lg: 20px;
+  --blur-xl: 32px;
+  --blur-2xl: 48px;
+  
+  /* ===========================================
+     OPACITY SYSTEM
+     =========================================== */
+  
+  --opacity-disabled: 0.4;
+  --opacity-faded: 0.6;
+  --opacity-muted: 0.7;
+  --opacity-default: 1;
+  
+  /* ===========================================
+     LAYOUT SYSTEM
+     =========================================== */
+  
+  --container-max: 1280px;
+  --container-padding: 2rem;
+  
+  /* ===========================================
+     Z-INDEX LAYERS
+     =========================================== */
+   
+  --z-grain: 9999;
+  --z-modal: 1000;
+  --z-overlay: 100;
+  --z-sticky: 50;
+  --z-content: 10;
+  
+  /* Ambient background layers */
+  --z-background-gradient: -50;
+  --z-background-aurora: -45;
+  --z-background-light: -40;
+  --z-background-glass: -30;
+  --z-background-noise: -10;
+}
+
+/* ===========================================
+   BASE STYLES
+   =========================================== */
+
+html {
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv05", "cv06", "cv07", "cv08", "cv11";
+  scroll-padding-top: 100px;
+}
+
+body {
+  font-family: var(--font-family-primary);
+  background: 
+    radial-gradient(60rem 60rem at 10% 10%, rgba(212, 165, 116, 0.04), transparent 70%),
+    radial-gradient(50rem 50rem at 90% 20%, rgba(232, 201, 122, 0.03), transparent 70%),
+    radial-gradient(40rem 40rem at 50% 80%, rgba(212, 165, 116, 0.02), transparent 70%),
+    var(--color-bg);
+  min-height: 100vh;
+  color: var(--color-text-primary);
+  overflow-x: hidden;
+  line-height: var(--line-height-normal);
+}
+
+/* ===========================================
+   TYPOGRAPHY BASE
+   =========================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: var(--font-size-7xl); }
+h2 { font-size: var(--font-size-5xl); }
+h3 { font-size: var(--font-size-4xl); }
+h4 { font-size: var(--font-size-3xl); }
+h5 { font-size: var(--font-size-2xl); }
+h6 { font-size: var(--font-size-xl); }
+
+p {
+  line-height: var(--line-height-relaxed);
+}
+
+/* ===========================================
+   LINKS & BUTTONS
+   =========================================== */
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--duration-normal) var(--ease-spring);
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ===========================================
+   SECTION SPACING
+   =========================================== */
+
+section {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: clamp(100px, 14vw, 160px) var(--container-padding);
+  position: relative;
+}
+
+/* Section dividers */
+section:not(:last-of-type)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(800px, 90%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(45, 35, 20, 0.1), transparent);
+}
+
+/* ===========================================
+   SELECTION & FOCUS
+   =========================================== */
+
+::selection {
+  background: var(--color-primary);
+  color: var(--color-bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ===========================================
+   REDUCED MOTION
+   =========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===========================================
+   PREMIUM UTILITY CLASSES
+   =========================================== */
+
+/* Eyebrow text style */
+.eyebrow {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
+}
+
+/* Film grain overlay */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-grain);
+  pointer-events: none;
+  opacity: 0.02;
+  mix-blend-mode: overlay;
+  background: url('/noise.png');
+  background-size: 250px;
+  backdrop-filter: blur(var(--blur-sm)) saturate(120%);
+  -webkit-backdrop-filter: blur(var(--blur-sm)) saturate(120%);
+  box-shadow: inset 0 1px 0 0 rgba(45, 35, 20, 0.03);
+}
+
+/* ===========================================
+   GLASSMORPHISM COMPONENTS
+   =========================================== */
+
+/* Premium glass card base */
+.premium-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-stroke);
+  border-radius: var(--radius-xl);
+  transition: all var(--duration-slow) var(--ease-spring);
+}
+
+.premium-card:hover {
+  border-color: var(--glass-stroke-strong);
+  box-shadow: var(--shadow-glow-sm);
+}
+
+/* Surface sheen effect */
+.surface-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.surface-sheen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    150deg,
+    var(--glass-highlight),
+    transparent 30%,
+    transparent 70%,
+    var(--glass-stroke-accent)
+  );
+  mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Liquid glass container */
+.liquid-glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-stroke);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(var(--blur-xl)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--blur-xl)) saturate(180%);
+  box-shadow: 
+    var(--shadow-inset-sm),
+    var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.liquid-glass:hover {
+  background: var(--glass-bg-strong);
+  border-color: var(--glass-stroke-strong);
+  box-shadow: 
+    var(--shadow-inset-md),
+    var(--shadow-md);
+}
+
+/* ===========================================
+   BUTTON SYSTEM
+   =========================================== */
+
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.01em;
+  transition: all var(--duration-normal) var(--ease-luxury);
+}
+
+.btn-premium::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    var(--glass-highlight),
+    var(--glass-stroke-accent)
+  );
+  mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-spring);
+}
+
+.btn-premium:hover::before {
+  opacity: 1;
+}
+
+/* Primary button */
+.btn-primary {
+  background: var(--gradient-subtle);
+  border: 1px solid var(--glass-stroke-accent);
+  color: var(--color-text-primary);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-glow-md);
+}
+
+/* Ghost button */
+.btn-ghost {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-stroke);
+  color: var(--color-text-secondary);
+}
+
+.btn-ghost:hover {
+  background: var(--glass-bg-strong);
+  color: var(--color-text-primary);
+  transform: translateY(-1px);
+}
+
+/* ===========================================
+   SKILL PILL SYSTEM
+   =========================================== */
+
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--duration-normal) var(--ease-spring);
+  border: 1px solid var(--glass-stroke);
+  background: var(--glass-bg);
+  color: var(--color-text-secondary);
+}
+
+.skill-pill:hover {
+  transform: translateY(-1px);
+  border-color: var(--glass-stroke-accent);
+  background: var(--glass-bg-strong);
+  color: var(--color-text-primary);
+}
+
+/* Accent skill pill */
+.skill-pill-accent {
+  border-color: var(--glass-stroke-accent);
+  background: var(--glass-bg-strong);
+  color: var(--color-text-primary);
+}
+
+.skill-pill-accent:hover {
+  background: var(--glass-bg-intense);
+  box-shadow: var(--shadow-glow-sm);
+}
+
+/* ===========================================
+   STATUS BADGE
+   =========================================== */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+}
+
+.status-badge-warning {
+  border: 1px solid rgba(255, 159, 10, 0.3);
+  background: rgba(255, 159, 10, 0.1);
+  color: rgba(255, 159, 10, 0.9);
+}
+
+/* ===========================================
+   GRADIENT TEXT
+   =========================================== */
+
+.text-gradient {
+  background: linear-gradient(120deg, #D4A574 10%, #E8C97A 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% 100%;
+  animation: gradientShift 8s ease-in-out infinite alternate;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* ===========================================
+   NEON GLOW EFFECT
+   =========================================== */
+
+.neon-glow {
+  box-shadow: 
+    0 0 25px rgba(212, 165, 116, 0.25),
+    0 0 45px rgba(232, 201, 122, 0.15),
+    inset 0 0 20px rgba(212, 165, 116, 0.05);
+}
+
+/* ===========================================
+   MAGNETIC EFFECT
+   =========================================== */
+
+.magnetic-area {
+  position: relative;
+}
+
+.magnetic-target {
+  display: inline-block;
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+/* ===========================================
+   PARALLAX BASE
+   =========================================== */
+
+.parallax {
+  transform-style: preserve-3d;
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+/* ===========================================
+   CARD HOVER EFFECTS
+   =========================================== */
+
+.card-hover {
+  transition: 
+    transform var(--duration-luxury) var(--ease-luxury),
+    border-color var(--duration-normal) var(--ease-spring),
+    box-shadow var(--duration-normal) var(--ease-spring),
+    color var(--duration-normal) var(--ease-spring);
+}
+
+.card-hover:hover {
+  transform: translateY(-6px);
+}
+
+/* Accent card */
+.card-accent {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-accent::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(160deg, rgba(212, 165, 116, 0.3), rgba(232, 201, 122, 0.2), transparent 60%);
+  pointer-events: none;
+}
+
+/* ===========================================
+   ANIMATED MESH GRADIENTS - Viewport Constrained
+   =========================================== */
+
+.animated-mesh-container {
+  will-change: transform;
+}
+
+/* Large radial mesh gradients - Layer 1 - Absolutely constrained to viewport, no overflow */
+.mesh-gradient-1,
+.mesh-gradient-2,
+.mesh-gradient-3 {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(160px);
+  transform-origin: center;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.mesh-gradient-1 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle at center, rgba(212, 165, 116, 0.06), transparent 70%);
+  top: 5%;
+  left: 2%;
+  animation: breathe-mesh 30s ease-in-out infinite, float-mesh-1 45s ease-in-out infinite alternate;
+}
+
+.mesh-gradient-2 {
+  width: 750px;
+  height: 750px;
+  background: radial-gradient(circle at center, rgba(232, 201, 122, 0.05), transparent 70%);
+  bottom: 15%;
+  right: 3%;
+  animation: breathe-mesh 35s ease-in-out infinite, float-mesh-2 50s ease-in-out infinite alternate;
+}
+
+.mesh-gradient-3 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle at center, rgba(201, 169, 97, 0.04), transparent 70%);
+  top: 45%;
+  left: 35%;
+  animation: breathe-mesh 40s ease-in-out infinite, float-mesh-3 55s ease-in-out infinite alternate;
+}
+
+/* Mobile mesh adjustments */
+@media (max-width: 768px) {
+  .mesh-gradient-1,
+  .mesh-gradient-2,
+  .mesh-gradient-3 {
+    filter: blur(140px);
+    width: 450px;
+    height: 450px;
+  }
+}
+
+/* Slow floating animations - subtle movements */
+@keyframes float-mesh-1 {
+   0% { transform: translate(0, 0) scale(1); }
+   100% { transform: translate(15px, -15px) scale(1.008); }
+}
+
+@keyframes float-mesh-2 {
+   0% { transform: translate(0, 0) scale(1); }
+   100% { transform: translate(-12px, 18px) scale(1.006); }
+}
+
+@keyframes float-mesh-3 {
+   0% { transform: translate(0, 0) scale(1); }
+   100% { transform: translate(12px, 10px) scale(1.004); }
+}
+
+/* Mesh breathe animation */
+@keyframes breathe-mesh {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.45; }
+}
+
+.breathe-mesh {
+  animation: breathe-mesh 25s ease-in-out infinite;
+  will-change: opacity;
+}
+
+/* ===========================================
+   AMBIENT MOTION - Living Environment
+   =========================================== */
+
+/* Breathing animation - subtle opacity pulse */
+@keyframes breathe {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.5; }
+}
+
+.breathe {
+  animation: breathe 25s ease-in-out infinite;
+  will-change: opacity;
+}
+
+/* Paper grain subtle animation */
+@keyframes grainShift {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
+}
+
+.paper-grain {
+  animation: grainShift 60s linear infinite;
+}
+
+/* Glass shimmer - subtle reflection sweep */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.glass-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    110deg,
+    transparent,
+    rgba(255, 255, 255, 0.02),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: shimmer 30s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Floating depth - subtle transform on sections */
+.section-floating {
+  transform-style: preserve-3d;
+}
+
+/* Ambient glow for premium cards */
+.premium-ambient {
+  animation: breathe 35s ease-in-out infinite;
+}
+
+/* Slow opacity transition for smooth state changes */
+.slow-opacity {
+  transition: opacity 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Section transition for smooth reveal */
+.section-transition {
+  transition: background-color var(--duration-luxury) var(--ease-spring);
+}
