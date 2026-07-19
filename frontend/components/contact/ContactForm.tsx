@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Loader2, CheckCircle, AlertCircle, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 interface ContactFormProps {
   onSubmit: (data: { name: string; email: string; message: string }) => Promise<void>;
@@ -45,6 +46,12 @@ export default function ContactForm({ onSubmit, loading, success, error }: Conta
     setTouched((prev) => ({ ...prev, [field]: true }));
   };
 
+  const isFieldValid = (field: keyof typeof touched) => {
+    if (field === "email" && touched.email && formData.email && !validateEmail(formData.email)) return false;
+    if (touched[field] && !formData[field]) return false;
+    return true;
+  };
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       {/* Name Field */}
@@ -52,30 +59,43 @@ export default function ContactForm({ onSubmit, loading, success, error }: Conta
         <label htmlFor="name" className="text-sm font-medium text-[var(--color-text-secondary)]">
           Name
         </label>
-        <input
-          id="name"
-          type="text"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          onBlur={() => handleBlur("name")}
-          placeholder="Your name"
-          disabled={loading}
-          className={cn(
-            "w-full rounded-[var(--radius-lg)] border bg-[var(--glass-bg)] px-4 py-3 text-sm text-[var(--color-text-primary)]",
-            "placeholder:text-[var(--color-text-muted)]",
-            "transition-all duration-300",
-            "focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/50",
-            touched.name && !formData.name && "border-[var(--color-error)]/50",
-            touched.name && formData.name && "border-[var(--glass-stroke-strong)]",
-            !touched.name && "border-[var(--glass-stroke)]"
-          )}
-          aria-invalid={touched.name && !formData.name ? "true" : "false"}
-          aria-describedby={touched.name && !formData.name ? "name-error" : undefined}
-        />
-        {touched.name && !formData.name && (
-          <span id="name-error" className="text-xs text-[var(--color-error)]" role="alert">
-            Name is required
+        <div className="relative">
+          <input
+            id="name"
+            type="text"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            onBlur={() => handleBlur("name")}
+            placeholder="Your name"
+            disabled={loading}
+            className={cn(
+              "peer w-full rounded-[var(--radius-lg)] border bg-[var(--glass-bg)] px-4 py-3 text-sm text-[var(--color-text-primary)]",
+              "placeholder:text-transparent",
+              "transition-all duration-300",
+              "focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/50 focus:shadow-[0_0_20px_rgba(212,165,116,0.3)]",
+              isFieldValid("name") ? "border-[var(--glass-stroke)]" : "border-[var(--color-error)]/50"
+            )}
+          />
+          <span 
+            className={cn(
+              "absolute left-4 top-3.5 text-sm text-[var(--color-text-muted)] pointer-events-none transition-all duration-300",
+              "peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-sm",
+              "peer-focus:top-1 peer-focus:text-xs peer-focus:text-[var(--color-primary)]",
+              formData.name ? "top-1 text-xs" : ""
+            )}
+          >
+            Your name
           </span>
+        </div>
+        {touched.name && !formData.name && (
+          <motion.span 
+            className="text-xs text-[var(--color-error)]" 
+            role="alert"
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            Name is required
+          </motion.span>
         )}
       </div>
 
@@ -84,30 +104,43 @@ export default function ContactForm({ onSubmit, loading, success, error }: Conta
         <label htmlFor="email" className="text-sm font-medium text-[var(--color-text-secondary)]">
           Email
         </label>
-        <input
-          id="email"
-          type="email"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          onBlur={() => handleBlur("email")}
-          placeholder="your@email.com"
-          disabled={loading}
-          className={cn(
-            "w-full rounded-[var(--radius-lg)] border bg-[var(--glass-bg)] px-4 py-3 text-sm text-[var(--color-text-primary)]",
-            "placeholder:text-[var(--color-text-muted)]",
-            "transition-all duration-300",
-            "focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/50",
-            touched.email && !validateEmail(formData.email) && formData.email && "border-[var(--color-error)]/50",
-            touched.email && validateEmail(formData.email) && "border-[var(--glass-stroke-strong)]",
-            !touched.email && "border-[var(--glass-stroke)]"
-          )}
-          aria-invalid={touched.email && !validateEmail(formData.email) ? "true" : "false"}
-          aria-describedby={touched.email && !validateEmail(formData.email) ? "email-error" : undefined}
-        />
-        {touched.email && formData.email && !validateEmail(formData.email) && (
-          <span id="email-error" className="text-xs text-[var(--color-error)]" role="alert">
-            Please enter a valid email
+        <div className="relative">
+          <input
+            id="email"
+            type="email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onBlur={() => handleBlur("email")}
+            placeholder="your@email.com"
+            disabled={loading}
+            className={cn(
+              "peer w-full rounded-[var(--radius-lg)] border bg-[var(--glass-bg)] px-4 py-3 text-sm text-[var(--color-text-primary)]",
+              "placeholder:text-transparent",
+              "transition-all duration-300",
+              "focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/50 focus:shadow-[0_0_20px_rgba(212,165,116,0.3)]",
+              isFieldValid("email") ? "border-[var(--glass-stroke)]" : "border-[var(--color-error)]/50"
+            )}
+          />
+          <span 
+            className={cn(
+              "absolute left-4 top-3.5 text-sm text-[var(--color-text-muted)] pointer-events-none transition-all duration-300",
+              "peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-sm",
+              "peer-focus:top-1 peer-focus:text-xs peer-focus:text-[var(--color-primary)]",
+              formData.email ? "top-1 text-xs" : ""
+            )}
+          >
+            your@email.com
           </span>
+        </div>
+        {touched.email && formData.email && !validateEmail(formData.email) && (
+          <motion.span 
+            className="text-xs text-[var(--color-error)]" 
+            role="alert"
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            Please enter a valid email
+          </motion.span>
         )}
       </div>
 
@@ -116,74 +149,93 @@ export default function ContactForm({ onSubmit, loading, success, error }: Conta
         <label htmlFor="message" className="text-sm font-medium text-[var(--color-text-secondary)]">
           Message
         </label>
-        <textarea
-          id="message"
-          value={formData.message}
-          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-          onBlur={() => handleBlur("message")}
-          placeholder="What would you like to discuss?"
-          rows={4}
-          disabled={loading}
-          className={cn(
-            "w-full rounded-[var(--radius-lg)] border bg-[var(--glass-bg)] px-4 py-3 text-sm text-[var(--color-text-primary)]",
-            "placeholder:text-[var(--color-text-muted)]",
-            "resize-none",
-            "transition-all duration-300",
-            "focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/50",
-            touched.message && !formData.message && "border-[var(--color-error)]/50",
-            touched.message && formData.message && "border-[var(--glass-stroke-strong)]",
-            !touched.message && "border-[var(--glass-stroke)]"
-          )}
-          aria-invalid={touched.message && !formData.message ? "true" : "false"}
-          aria-describedby={touched.message && !formData.message ? "message-error" : undefined}
-        />
-        {touched.message && !formData.message && (
-          <span id="message-error" className="text-xs text-[var(--color-error)]" role="alert">
-            Message is required
+        <div className="relative">
+          <textarea
+            id="message"
+            value={formData.message}
+            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            onBlur={() => handleBlur("message")}
+            placeholder="What would you like to discuss?"
+            rows={4}
+            disabled={loading}
+            className={cn(
+              "peer w-full rounded-[var(--radius-lg)] border bg-[var(--glass-bg)] px-4 py-3 text-sm text-[var(--color-text-primary)]",
+              "placeholder:text-transparent",
+              "resize-none",
+              "transition-all duration-300",
+              "focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/50 focus:shadow-[0_0_20px_rgba(212,165,116,0.3)]",
+              isFieldValid("message") ? "border-[var(--glass-stroke)]" : "border-[var(--color-error)]/50"
+            )}
+          />
+          <span 
+            className={cn(
+              "absolute left-4 top-3.5 text-sm text-[var(--color-text-muted)] pointer-events-none transition-all duration-300",
+              "peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-sm",
+              "peer-focus:top-1 peer-focus:text-xs peer-focus:text-[var(--color-primary)]",
+              formData.message ? "top-1 text-xs" : ""
+            )}
+          >
+            What would you like to discuss?
           </span>
+        </div>
+        {touched.message && !formData.message && (
+          <motion.span 
+            className="text-xs text-[var(--color-error)]" 
+            role="alert"
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            Message is required
+          </motion.span>
         )}
       </div>
 
       {/* Submit Button */}
-      <button
+      <motion.button
         type="submit"
         disabled={loading || !formData.name || !formData.email || !validateEmail(formData.email) || !formData.message}
         className={cn(
           "btn-premium btn-primary relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5",
-          "text-sm font-semibold text-white backdrop-blur-xl",
+          "text-sm font-semibold text-[var(--color-text-primary)] backdrop-blur-xl",
           "transition-all duration-300",
-          "disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100 disabled:hover:shadow-none",
-          "hover:-translate-y-0.5 hover:shadow-[var(--shadow-glow-md)]",
-          "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary)]"
+          "disabled:cursor-not-allowed disabled:opacity-40",
+          "will-change-transform"
         )}
+        whileHover={!loading && formData.name && formData.email && validateEmail(formData.email) && formData.message ? { 
+          y: -2, 
+          scale: 1.01,
+          boxShadow: "var(--shadow-glow-md)"
+        } : undefined}
+        whileTap={!loading && formData.name && formData.email && validateEmail(formData.email) && formData.message ? { scale: 0.97 } : undefined}
+        animate={success ? { scale: [1, 1.05, 1] } : undefined}
+        transition={{ duration: 0.4 }}
       >
-        {loading ? (
-          <>
-            <Loader2 size={16} className="animate-spin" />
-            Sending...
-          </>
-        ) : success ? (
-          <>
+        <motion.div
+          animate={loading ? { rotate: 360 } : {}}
+          transition={loading ? { duration: 1, ease: "linear", repeat: Infinity } : {}}
+        >
+          {loading ? (
+            <Loader2 size={16} />
+          ) : success ? (
             <CheckCircle size={16} />
-            Sent!
-          </>
-        ) : (
-          <>
+          ) : (
             <Send size={16} />
-            Send Message
-          </>
-        )}
-      </button>
+          )}
+        </motion.div>
+        {loading ? "Sending..." : success ? "Sent!" : "Send Message"}
+      </motion.button>
 
       {/* Error Message */}
       {error && (
-        <div
+        <motion.div
           className="flex items-center gap-2 text-[var(--color-error)]"
           role="alert"
+          initial={{ opacity: 0, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
         >
           <AlertCircle size={16} />
           <span className="text-sm">{error}</span>
-        </div>
+        </motion.div>
       )}
     </form>
   );

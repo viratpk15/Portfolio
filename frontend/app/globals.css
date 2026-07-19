@@ -219,9 +219,9 @@ html {
 body {
   font-family: var(--font-family-primary);
   background: 
-    radial-gradient(60rem 60rem at 10% 10%, rgba(212, 165, 116, 0.04), transparent 70%),
-    radial-gradient(50rem 50rem at 90% 20%, rgba(232, 201, 122, 0.03), transparent 70%),
-    radial-gradient(40rem 40rem at 50% 80%, rgba(212, 165, 116, 0.02), transparent 70%),
+    radial-gradient(60rem 60rem at 10% 10%, rgba(212, 165, 116, 0.06), transparent 70%),
+    radial-gradient(50rem 50rem at 90% 20%, rgba(232, 201, 122, 0.05), transparent 70%),
+    radial-gradient(40rem 40rem at 50% 80%, rgba(212, 165, 116, 0.04), transparent 70%),
     var(--color-bg);
   min-height: 100vh;
   color: var(--color-text-primary);
@@ -790,4 +790,113 @@ section:not(:last-of-type)::after {
 /* Section transition for smooth reveal */
 .section-transition {
   transition: background-color var(--duration-luxury) var(--ease-spring);
+}
+
+/* Text hover effects for premium feel */
+.text-hover-glow {
+  transition: all var(--duration-normal) var(--ease-spring);
+}
+
+.text-hover-glow:hover {
+  color: var(--color-primary);
+  transform: translateX(2px);
+}
+
+/* SVG hover effects */
+svg.svg-hover {
+  transition: transform var(--duration-normal) var(--ease-spring), filter var(--duration-normal) var(--ease-spring);
+}
+
+svg.svg-hover:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(212, 165, 116, 0.3));
+}
+
+/* Premium Link Interactions */
+.premium-link {
+  position: relative;
+  transition: color var(--duration-normal) var(--ease-spring);
+}
+
+.premium-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-primary);
+  transition: width var(--duration-normal) var(--ease-spring);
+}
+
+.premium-link:hover::after {
+  width: 100%;
+}
+
+.premium-link:hover {
+  color: var(--color-primary);
+}
+
+.premium-link:hover .link-arrow {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+.link-arrow {
+  opacity: 0;
+  transition: all var(--duration-normal) var(--ease-spring);
+}
+
+/* Ambient floating light - very subtle */
+.ambient-float {
+  animation: float-ambient 40s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes float-ambient {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(10px, -15px) scale(1.005); }
+  50% { transform: translate(-10px, 20px) scale(0.995); }
+  75% { transform: translate(15px, 10px) scale(1.008); }
+}
+
+/* Premium hover lift for all interactive cards */
+.interactive-lift {
+  transition: transform var(--duration-slow) var(--ease-spring), box-shadow var(--duration-slow) var(--ease-spring);
+}
+
+.interactive-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-glow-md);
+}
+
+/* Soft shadow expansion on hover */
+.shadow-expand {
+  transition: box-shadow var(--duration-luxury) var(--ease-luxury), border-color var(--duration-normal) var(--ease-spring);
+}
+
+/* Text link with animated underline */
+.text-link-animated {
+  position: relative;
+  color: var(--color-text-tertiary);
+  transition: color var(--duration-normal) var(--ease-spring);
+}
+
+.text-link-animated:hover {
+  color: var(--color-primary);
+}
+
+.text-link-animated::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-primary);
+  transition: width var(--duration-normal) var(--ease-spring);
+}
+
+.text-link-animated:hover::after {
+  width: 100%;
 }

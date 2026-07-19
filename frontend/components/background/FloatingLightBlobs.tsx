@@ -16,70 +16,71 @@ export default function FloatingLightBlobs() {
         <div className="absolute left-[2%] top-[5%] h-[500px] w-[500px] rounded-full bg-[var(--color-primary)]/5 blur-[120px]" />
         <div className="absolute right-[5%] top-[30%] h-[450px] w-[450px] rounded-full bg-[var(--color-secondary)]/5 blur-[120px]" />
         <div className="absolute bottom-[15%] left-[25%] h-[400px] w-[400px] rounded-full bg-[var(--color-primary)]/5 blur-[150px]" />
+        <div className="absolute left-[15%] top-[45%] h-[350px] w-[350px] rounded-full bg-[var(--color-secondary)]/5 blur-[100px]" />
       </div>
     );
   }
 
   return (
     <div className="fixed inset-0 -z-40 overflow-hidden pointer-events-none">
-      {/* Primary light blob - slow breathing motion */}
+      {/* Primary light blob - ultra-slow warm glow */}
       <motion.div
         className="absolute left-[2%] top-[5%] h-[500px] w-[500px] rounded-full bg-[var(--color-primary)]/5 blur-[120px] will-change-transform"
         animate={{
-          x: [0, 60, -30, 0],
-          y: [0, -50, 40, 0],
-          scale: [1, 1.02, 0.99, 1],
+          x: [0, 40, -20, 0],
+          y: [0, -35, 25, 0],
+          scale: [1, 1.01, 0.99, 1],
         }}
         transition={{
-          duration: 45,
+          duration: 60,
           ease: "easeInOut",
           repeat: Infinity,
           repeatType: "mirror",
         }}
       />
 
-      {/* Secondary light blob */}
+      {/* Secondary light blob - soft ambient */}
       <motion.div
-        className="absolute right-[5%] top-[30%] h-[450px] w-[450px] rounded-full bg-[var(--color-secondary)]/5 blur-[120px] will-change-transform"
+        className="absolute right-[5%] top-[30%] h-[450px] w-[450px] rounded-full bg-[var(--color-secondary)]/4 blur-[120px] will-change-transform"
         animate={{
-          x: [0, -50, 40, 0],
-          y: [0, 40, -30, 0],
-          scale: [1, 0.995, 1.035, 1],
+          x: [0, -35, 25, 0],
+          y: [0, 30, -25, 0],
+          scale: [1, 0.995, 1.015, 1],
         }}
         transition={{
-          duration: 50,
+          duration: 65,
           ease: "easeInOut",
           repeat: Infinity,
           repeatType: "mirror",
         }}
       />
 
-      {/* Tertiary light blob - constrained to viewport */}
+      {/* Tertiary light blob - deep atmosphere */}
       <motion.div
-        className="absolute bottom-[15%] left-[25%] h-[400px] w-[400px] rounded-full bg-[var(--color-primary)]/5 blur-[150px] will-change-transform"
+        className="absolute bottom-[15%] left-[25%] h-[400px] w-[400px] rounded-full bg-[var(--color-primary)]/4 blur-[150px] will-change-transform"
         animate={{
-          x: [0, 40, -50, 0],
-          y: [0, -40, 50, 0],
-          scale: [1, 1.015, 1.005, 1],
+          x: [0, 30, -40, 0],
+          y: [0, -30, 35, 0],
+          scale: [1, 1.01, 1.005, 1],
         }}
         transition={{
-          duration: 55,
+          duration: 70,
           ease: "easeInOut",
           repeat: Infinity,
           repeatType: "mirror",
         }}
       />
 
-      {/* Subtle inner glow - viewport constrained */}
+      {/* Inner warm glow - very subtle */}
       <motion.div
         className="absolute left-[15%] top-[45%] h-[350px] w-[350px] rounded-full bg-[var(--color-secondary)]/3 blur-[100px] will-change-transform"
         animate={{
-          x: [0, 25, -15, 0],
-          y: [0, -25, 20, 0],
-          opacity: [0.03, 0.05, 0.03],
+          x: [0, 20, -10, 0],
+          y: [0, -20, 15, 0],
+          opacity: [0.03, 0.04, 0.03],
         }}
         transition={{
-          duration: 35,
+          duration: 75,
           ease: "easeInOut",
           repeat: Infinity,
           repeatType: "mirror",

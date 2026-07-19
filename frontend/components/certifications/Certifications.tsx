@@ -16,7 +16,7 @@ export default function Certifications() {
         <div className="grid gap-6 sm:grid-cols-2">
           {certifications.map((cert, index) => (
             <FadeIn key={cert.title} delay={index * 0.08}>
-              <article className="surface-sheen card-hover group relative flex h-full flex-col rounded-[var(--radius-xl)] border border-[var(--glass-stroke)] bg-[var(--glass-bg)] p-8 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1">
+              <article className="surface-sheen card-hover group relative flex h-full flex-col rounded-[var(--radius-xl)] border border-[var(--glass-stroke)] bg-[var(--glass-bg)] p-8 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-md)]">
                 {/* Icon with premium treatment */}
                 <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-[var(--radius-lg)] border border-[var(--glass-stroke-accent)] bg-[var(--glass-bg-intense)] text-[var(--color-primary)]">
                   <Award size={24} />
@@ -34,9 +34,6 @@ export default function Certifications() {
                     {cert.description}
                   </p>
                 </div>
-
-                {/* Decorative glow on hover */}
-                <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-[var(--color-primary)]/5 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               </article>
             </FadeIn>
           ))}

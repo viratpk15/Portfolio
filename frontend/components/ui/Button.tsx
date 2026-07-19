@@ -1,4 +1,7 @@
+"use client";
+
 import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -17,22 +20,28 @@ export default function Button({
   external = true,
 }: Props) {
   const base =
-    "btn-premium relative inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium leading-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary)]";
+    "btn-premium relative inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium leading-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary)] overflow-hidden backdrop-blur-sm";
 
   const variants: Record<string, string> = {
     primary:
-      "btn-primary text-[var(--color-text-primary)] hover:shadow-[var(--shadow-glow-md)] hover:-translate-y-0.5",
+      "text-[var(--color-text-primary)]",
     ghost:
-      "btn-ghost text-[var(--color-text-secondary)] hover:border-[var(--glass-stroke-strong)]",
+      "text-[var(--color-text-secondary)]",
   };
 
   const content = (
     <span className="relative flex items-center gap-2">
       {children}
-      <ArrowUpRight
-        size={16}
-        className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-      />
+      <motion.div
+        whileHover={{ x: 4, y: -4, scale: 1.1 }}
+        whileTap={{ x: 2, y: -2, scale: 0.95 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <ArrowUpRight
+          size={16}
+          className="transition-transform duration-300"
+        />
+      </motion.div>
     </span>
   );
 
@@ -41,20 +50,28 @@ export default function Button({
   if (href) {
     const isExternal = external && !href.startsWith("#");
     return (
-      <a
+      <motion.a
         href={href}
         target={isExternal ? "_blank" : undefined}
         rel={isExternal ? "noopener noreferrer" : undefined}
         className={classes}
+        whileHover={{ y: -3, scale: 1.02 }}
+        whileTap={{ scale: 0.97, y: 0 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       >
         {content}
-      </a>
+      </motion.a>
     );
   }
 
   return (
-    <button className={classes}>
+    <motion.button
+      className={classes}
+      whileHover={{ y: -3, scale: 1.02 }}
+      whileTap={{ scale: 0.97, y: 0 }}
+      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+    >
       {content}
-    </button>
+    </motion.button>
   );
 }
