@@ -101,7 +101,7 @@ export default function Contact() {
                 >
                   <div className="relative aspect-[4/5] sm:aspect-[3/4]">
                     <Image
-                      src="/images/profile/contact.PNG"
+                      src="/images/profile/contact.png"
                       alt="Contact Virat"
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
