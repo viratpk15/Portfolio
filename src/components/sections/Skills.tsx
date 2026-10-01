@@ -180,11 +180,11 @@ export function Skills() {
                   duration: 0.75,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group relative rounded-3xl border border-(--border-strong) bg-glass backdrop-blur-2xl p-7 sm:p-10 shadow-(--shadow-elevated) transition-all duration-300 hover:border-(--accent-primary) flex flex-col justify-between"
+                className="group relative rounded-3xl border border-line-strong bg-glass backdrop-blur-2xl p-7 sm:p-10 shadow-(--shadow-elevated) transition-all duration-300 hover:border-(--accent-primary) flex flex-col justify-between"
               >
                 {/* Header: System Number, Category Icon, Title */}
                 <div>
-                  <div className="flex items-center justify-between pb-4 border-b border-(--border-hairline) mb-6">
+                  <div className="flex items-center justify-between pb-4 border-b border-line mb-6">
                     <div className="flex items-center gap-3">
                       <span
                         className="font-display text-3xl sm:text-4xl font-semibold tracking-tight"
@@ -197,7 +197,7 @@ export function Skills() {
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-(--border-hairline) bg-surface/70">
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-line bg-surface/70">
                       <Icon size={16} className="text-(--accent-primary)" />
                       <span className="font-mono text-xs uppercase tracking-wider text-(--text-secondary)">
                         {sys.subtitle}

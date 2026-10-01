@@ -122,7 +122,7 @@ export function FloatingNavbar() {
 
           {/* Desktop Navigation Items with Liquid Glass Sliding Indicator */}
           <nav
-            className="hidden md:flex items-center gap-1 p-1 rounded-full border border-(--border-hairline) bg-black/10 backdrop-blur-md"
+            className="hidden md:flex items-center gap-1 p-1 rounded-full border border-line bg-black/10 backdrop-blur-md"
             aria-label="Main navigation"
             onMouseLeave={() => setHoveredNav(null)}
           >
@@ -140,8 +140,8 @@ export function FloatingNavbar() {
                   aria-current={isActive ? "true" : undefined}
                   className={`relative px-4 py-1.5 text-[15px] lg:text-[15.5px] font-medium transition-colors duration-200 focus-visible:outline-none rounded-full select-none cursor-pointer ${
                     isActive
-                      ? "text-(--text-primary) font-semibold"
-                      : "text-(--text-secondary) hover:text-(--text-primary)"
+                      ? "text-ink font-semibold"
+                      : "text-(--text-secondary) hover:text-ink"
                   }`}
                 >
                   {showPill && (
@@ -163,7 +163,7 @@ export function FloatingNavbar() {
               href={profile.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-9 h-9 rounded-full border border-(--border-strong) bg-surface/75 text-(--text-primary) hover:text-(--accent-bright) hover:border-(--accent-primary) hover:bg-(--accent-primary)/20 transition-all duration-200 shadow-xs cursor-pointer"
+              className="flex items-center justify-center w-9 h-9 rounded-full border border-line-strong bg-surface/75 text-ink hover:text-(--accent-bright) hover:border-(--accent-primary) hover:bg-(--accent-primary)/20 transition-all duration-200 shadow-xs cursor-pointer"
               aria-label="GitHub Profile"
             >
               <GithubMark size={19} />
@@ -172,7 +172,7 @@ export function FloatingNavbar() {
               href={profile.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-9 h-9 rounded-full border border-(--border-strong) bg-surface/75 text-(--text-primary) hover:text-(--accent-bright) hover:border-(--accent-primary) hover:bg-(--accent-primary)/20 transition-all duration-200 shadow-xs cursor-pointer"
+              className="flex items-center justify-center w-9 h-9 rounded-full border border-line-strong bg-surface/75 text-ink hover:text-(--accent-bright) hover:border-(--accent-primary) hover:bg-(--accent-primary)/20 transition-all duration-200 shadow-xs cursor-pointer"
               aria-label="LinkedIn Profile"
             >
               <LinkedInMark size={19} />
@@ -188,7 +188,7 @@ export function FloatingNavbar() {
               rel="noopener noreferrer"
               className="group flex items-center gap-2 px-4 py-2 rounded-full border border-(--accent-primary)/50 bg-(--accent-primary)/15 text-ink text-xs sm:text-[13px] font-mono font-semibold uppercase tracking-wider transition-all duration-200 hover:bg-(--accent-primary)/30 hover:border-(--accent-bright) shadow-xs cursor-pointer"
             >
-              <span className="text-(--text-primary)">RESUME</span>
+              <span className="text-ink">RESUME</span>
               <ArrowDown
                 size={13}
                 className="text-(--accent-bright) transition-transform duration-200 group-hover:translate-y-0.5"
@@ -275,13 +275,13 @@ export function FloatingNavbar() {
             </div>
 
             {/* Mobile Footer Links */}
-            <div className="flex items-center justify-between pt-5 border-t border-(--border-strong)">
+            <div className="flex items-center justify-between pt-5 border-t border-line-strong">
               <div className="flex items-center gap-3">
                 <a
                   href={profile.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-10 h-10 rounded-full border border-(--border-strong) bg-surface text-(--text-primary) hover:text-(--accent-bright) hover:border-(--accent-primary) transition-all"
+                  className="flex items-center justify-center w-10 h-10 rounded-full border border-line-strong bg-surface text-ink hover:text-(--accent-bright) hover:border-(--accent-primary) transition-all"
                   aria-label="GitHub Profile"
                 >
                   <GithubMark size={20} />
@@ -290,7 +290,7 @@ export function FloatingNavbar() {
                   href={profile.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-10 h-10 rounded-full border border-(--border-strong) bg-surface text-(--text-primary) hover:text-(--accent-bright) hover:border-(--accent-primary) transition-all"
+                  className="flex items-center justify-center w-10 h-10 rounded-full border border-line-strong bg-surface text-ink hover:text-(--accent-bright) hover:border-(--accent-primary) transition-all"
                   aria-label="LinkedIn Profile"
                 >
                   <LinkedInMark size={20} />
@@ -300,7 +300,7 @@ export function FloatingNavbar() {
                 href={profile.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-(--accent-primary) bg-(--accent-primary)/20 text-(--text-primary) font-mono text-xs uppercase font-semibold tracking-wider hover:bg-(--accent-primary)/30 transition-all shadow-sm"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-(--accent-primary) bg-(--accent-primary)/20 text-ink font-mono text-xs uppercase font-semibold tracking-wider hover:bg-(--accent-primary)/30 transition-all shadow-sm"
               >
                 <span>RESUME</span>
                 <ArrowDown size={13} className="text-(--accent-bright)" />

@@ -82,7 +82,7 @@ export function About() {
             className="lg:col-span-5 relative"
           >
             <div
-              className="relative w-full rounded-3xl overflow-hidden group border border-(--border-strong) shadow-(--shadow-elevated)"
+              className="relative w-full rounded-3xl overflow-hidden group border border-line-strong shadow-(--shadow-elevated)"
               style={{ aspectRatio: "3/4", maxHeight: "72vh" }}
             >
               <Image
@@ -90,7 +90,7 @@ export function About() {
                 alt="Virat P K Gupta — Formal Portrait"
                 fill
                 sizes="(max-width: 1024px) 92vw, 42vw"
-                className="object-cover object-top theme-image-graded transition-transform duration-[1200ms] group-hover:scale-[1.03]"
+                className="object-cover object-top theme-image-graded transition-transform duration-1200 group-hover:scale-[1.03]"
                 priority
               />
               {/* Bottom gradient fade */}
@@ -111,7 +111,7 @@ export function About() {
                   color: "var(--text-secondary)",
                 }}
               >
-                <span className="font-medium text-(--text-primary)">
+                <span className="font-medium text-ink">
                   Virat P K Gupta
                 </span>
                 <span
@@ -215,7 +215,7 @@ export function About() {
         </div>
 
         {/* ── METRIC ROW AT BOTTOM: CGPA 9.33 (Floating, No Block Box) ── */}
-        <div className="mt-20 sm:mt-28 pt-10 border-t border-(--border-hairline) grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="mt-20 sm:mt-28 pt-10 border-t border-line grid grid-cols-2 lg:grid-cols-4 gap-8">
           {metrics.map((m, idx) => (
             <motion.div
               key={m.label}
