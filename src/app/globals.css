@@ -1,0 +1,696 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..500;1,9..144,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+/* ============================================================
+   REFERENCE-DRIVEN 4-THEME PREMIUM SYSTEM
+   01 · MIDNIGHT MACHINE       (Automotive / Aerospace, Brushed Steel, Midnight Glass)
+   02 · OBSIDIAN INTELLIGENCE   (Cinematic AI, Deep Wine/Burgundy from Black)
+   03 · MATTE SILVER INTELLIGENCE (Matte Black, Graphite, Silver, Cool White)
+   04 · CHAMPAGNE FUTURE        (Minimalist Luxury Architecture, Warm Silver)
+   ============================================================ */
+
+/* ────────────────────────────────────────────────────────────
+   01 · MIDNIGHT / STEEL BLUE ("MIDNIGHT MACHINE")
+   Deep navy + blue-gray + charcoal + steel.
+   ──────────────────────────────────────────────────────────── */
+:root,
+:root[data-theme="midnight"],
+html[data-theme="midnight"],
+[data-theme="midnight"],
+[data-theme="blue"] {
+  /* Surfaces & Backgrounds */
+  --bg-base: #0F101E;
+  --bg-cinematic: #080910;
+  --bg-elevated: #161828;
+  --surface: #1D2033;
+  --surface-subtle: #161828;
+  --surface-card: #1D2033;
+
+  /* Liquid Glass System */
+  --bg-glass: rgba(22, 24, 40, 0.65);
+  --bg-glass-light: rgba(105, 115, 142, 0.10);
+  --bg-glass-nav: rgba(15, 16, 30, 0.93);
+  --glass-subtle-bg: rgba(22, 24, 40, 0.38);
+  --glass-subtle-border: rgba(137, 147, 173, 0.12);
+  --glass-medium-bg: rgba(22, 24, 40, 0.58);
+  --glass-medium-border: rgba(137, 147, 173, 0.18);
+  --glass-strong-bg: rgba(29, 32, 51, 0.76);
+  --glass-strong-border: rgba(169, 178, 197, 0.24);
+  --glass-floating-bg: rgba(22, 24, 40, 0.72);
+  --glass-floating-border: rgba(137, 147, 173, 0.28);
+  --glass-floating-shadow: 0 24px 70px rgba(8, 9, 16, 0.75), inset 0 1px 0 rgba(183, 196, 216, 0.14);
+
+  /* Borders */
+  --border-hairline: rgba(137, 147, 173, 0.14);
+  --border-strong: rgba(137, 147, 173, 0.28);
+  --border-accent: rgba(169, 178, 197, 0.35);
+
+  /* Typography — CONTRAST-CHECKED */
+  --text-primary: #E6EAF0;
+  --text-secondary: #A0AAC0;
+  --text-muted: #6B7490;
+  --text-metadata: #4A5168;
+
+  /* Accents */
+  --accent-primary: #95A0BC;
+  --accent-bright: #B5BDD0;
+  --accent-deep: #292D44;
+  --accent-highlight: #C5D0E2;
+  --accent-secondary: #7A849E;
+
+  /* Aliases */
+  --accent-gold: var(--accent-primary);
+  --accent-honey: var(--accent-bright);
+  --accent-caramel: var(--accent-secondary);
+  --accent-sand: var(--text-secondary);
+  --accent-sunset: var(--accent-highlight);
+
+  /* Glows & Shadows */
+  --glow-primary: 0 0 60px rgba(137, 147, 173, 0.16);
+  --glow-cinematic: 0 40px 120px rgba(8, 9, 16, 0.85);
+  --shadow-elevated: 0 20px 60px rgba(8, 9, 16, 0.65);
+  --shadow-soft: 0 10px 30px rgba(8, 9, 16, 0.4);
+
+  /* Gradients */
+  --gradient-cta: linear-gradient(135deg, #95A0BC 0%, #7A849E 50%, #292D44 100%);
+  --gradient-gold: var(--gradient-cta);
+  --gradient-gold-text: linear-gradient(135deg, #E6EAF0 0%, #B5BDD0 60%, #95A0BC 100%);
+  --gradient-progress: linear-gradient(90deg, #34394C, #95A0BC, #C5D0E2);
+  --hero-bleed: radial-gradient(circle at 65% 25%, rgba(105, 120, 155, 0.28) 0%, rgba(29, 32, 51, 0.45) 45%, transparent 70%);
+  --hero-bleed-secondary: radial-gradient(circle at 20% 80%, rgba(41, 45, 68, 0.35) 0%, transparent 60%);
+
+  /* Image Treatment */
+  --image-filter: saturate(0.85) contrast(1.08) hue-rotate(-5deg);
+  --image-overlay: rgba(15, 16, 30, 0.35);
+
+  /* Ghost typography color */
+  --ghost-text: rgba(137, 147, 173, 0.045);
+
+  color-scheme: dark;
+}
+
+/* ────────────────────────────────────────────────────────────
+   02 · OBSIDIAN / BURGUNDY ("OBSIDIAN INTELLIGENCE")
+   Cinematic, mysterious, AI laboratory. Deep wine from black.
+   ──────────────────────────────────────────────────────────── */
+:root[data-theme="obsidian"],
+html[data-theme="obsidian"],
+[data-theme="obsidian"],
+[data-theme="gold"] {
+  /* Surfaces & Backgrounds */
+  --bg-base: #040203;
+  --bg-cinematic: #000000;
+  --bg-elevated: #100104;
+  --surface: #180108;
+  --surface-subtle: #100104;
+  --surface-card: #180108;
+
+  /* Liquid Glass System */
+  --bg-glass: rgba(24, 1, 8, 0.70);
+  --bg-glass-light: rgba(90, 10, 29, 0.12);
+  --bg-glass-nav: rgba(4, 2, 3, 0.95);
+  --glass-subtle-bg: rgba(24, 1, 8, 0.42);
+  --glass-subtle-border: rgba(155, 16, 38, 0.12);
+  --glass-medium-bg: rgba(24, 1, 8, 0.62);
+  --glass-medium-border: rgba(155, 16, 38, 0.18);
+  --glass-strong-bg: rgba(41, 3, 15, 0.78);
+  --glass-strong-border: rgba(193, 18, 48, 0.26);
+  --glass-floating-bg: rgba(24, 1, 8, 0.76);
+  --glass-floating-border: rgba(155, 16, 38, 0.30);
+  --glass-floating-shadow: 0 24px 80px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(213, 208, 208, 0.12);
+
+  /* Borders */
+  --border-hairline: rgba(155, 16, 38, 0.16);
+  --border-strong: rgba(155, 16, 38, 0.30);
+  --border-accent: rgba(193, 18, 48, 0.40);
+
+  /* Typography — CONTRAST-CHECKED */
+  --text-primary: #F0EAEA;
+  --text-secondary: #D0C8C8;
+  --text-muted: #907A7E;
+  --text-metadata: #5D4B50;
+
+  /* Accents */
+  --accent-primary: #B01830;
+  --accent-bright: #D01838;
+  --accent-deep: #410817;
+  --accent-highlight: #E0D8D8;
+  --accent-secondary: #6A0E22;
+
+  /* Aliases */
+  --accent-gold: var(--accent-primary);
+  --accent-honey: var(--accent-bright);
+  --accent-caramel: var(--accent-secondary);
+  --accent-sand: var(--text-secondary);
+  --accent-sunset: var(--accent-highlight);
+
+  /* Glows & Shadows */
+  --glow-primary: 0 0 60px rgba(155, 16, 38, 0.20);
+  --glow-cinematic: 0 40px 120px rgba(0, 0, 0, 0.9);
+  --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.85);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+  /* Gradients */
+  --gradient-cta: linear-gradient(135deg, #B01830 0%, #6A0E22 50%, #29030F 100%);
+  --gradient-gold: var(--gradient-cta);
+  --gradient-gold-text: linear-gradient(135deg, #F0EAEA 0%, #E0D8D8 60%, #B01830 100%);
+  --gradient-progress: linear-gradient(90deg, #410817, #B01830, #D0C8C8);
+  --hero-bleed: radial-gradient(circle at 65% 25%, rgba(90, 10, 29, 0.42) 0%, rgba(41, 3, 15, 0.28) 50%, transparent 75%);
+  --hero-bleed-secondary: radial-gradient(circle at 15% 85%, rgba(65, 8, 23, 0.32) 0%, transparent 65%);
+
+  /* Image Treatment */
+  --image-filter: contrast(1.12) brightness(0.92) saturate(0.9) sepia(0.08);
+  --image-overlay: rgba(16, 1, 4, 0.45);
+
+  /* Ghost typography color */
+  --ghost-text: rgba(155, 16, 38, 0.05);
+
+  color-scheme: dark;
+}
+
+/* ────────────────────────────────────────────────────────────
+   03 · MATTE SILVER INTELLIGENCE
+   Matte black + graphite + silver + cool white.
+   Premium hardware, monochrome editorial luxury.
+   ──────────────────────────────────────────────────────────── */
+:root[data-theme="matte-silver"],
+html[data-theme="matte-silver"],
+[data-theme="matte-silver"],
+[data-theme="silver"] {
+  /* Surfaces & Backgrounds */
+  --bg-base: #080808;
+  --bg-cinematic: #050505;
+  --bg-elevated: #111111;
+  --surface: #151515;
+  --surface-subtle: #0D0D0D;
+  --surface-card: #1B1B1B;
+
+  /* Liquid Glass System (Graphite / silver translucent glass) */
+  --bg-glass: rgba(21, 21, 21, 0.68);
+  --bg-glass-light: rgba(220, 220, 220, 0.06);
+  --bg-glass-nav: rgba(10, 10, 10, 0.94);
+  --glass-subtle-bg: rgba(21, 21, 21, 0.40);
+  --glass-subtle-border: rgba(220, 220, 220, 0.10);
+  --glass-medium-bg: rgba(21, 21, 21, 0.60);
+  --glass-medium-border: rgba(220, 220, 220, 0.14);
+  --glass-strong-bg: rgba(27, 27, 27, 0.78);
+  --glass-strong-border: rgba(220, 220, 220, 0.20);
+  --glass-floating-bg: rgba(21, 21, 21, 0.74);
+  --glass-floating-border: rgba(220, 220, 220, 0.18);
+  --glass-floating-shadow: 0 24px 80px rgba(0, 0, 0, 0.90), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  /* Borders */
+  --border-hairline: rgba(220, 220, 220, 0.10);
+  --border-strong: rgba(220, 220, 220, 0.20);
+  --border-accent: rgba(220, 220, 220, 0.30);
+
+  /* Typography — CONTRAST-CHECKED */
+  --text-primary: #F0F0F0;
+  --text-secondary: #B8B8B8;
+  --text-muted: #8D8D8D;
+  --text-metadata: #5A5A5A;
+
+  /* Accents — silver as illumination */
+  --accent-primary: #C0C0C0;
+  --accent-bright: #E0E0E0;
+  --accent-deep: #292929;
+  --accent-highlight: #C9D0D8;
+  --accent-secondary: #9A9A9A;
+
+  /* Aliases */
+  --accent-gold: var(--accent-primary);
+  --accent-honey: var(--accent-bright);
+  --accent-caramel: var(--accent-secondary);
+  --accent-sand: var(--text-secondary);
+  --accent-sunset: var(--accent-highlight);
+
+  /* Glows & Shadows */
+  --glow-primary: 0 0 60px rgba(200, 200, 200, 0.08);
+  --glow-cinematic: 0 40px 120px rgba(0, 0, 0, 0.92);
+  --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.80);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.55);
+
+  /* Gradients */
+  --gradient-cta: linear-gradient(135deg, #D0D0D0 0%, #9A9A9A 50%, #414141 100%);
+  --gradient-gold: var(--gradient-cta);
+  --gradient-gold-text: linear-gradient(135deg, #F0F0F0 0%, #D0D0D0 60%, #9A9A9A 100%);
+  --gradient-progress: linear-gradient(90deg, #353535, #9A9A9A, #D0D0D0);
+  --hero-bleed: radial-gradient(circle at 65% 25%, rgba(160, 160, 160, 0.12) 0%, rgba(40, 40, 40, 0.25) 50%, transparent 75%);
+  --hero-bleed-secondary: radial-gradient(circle at 20% 80%, rgba(50, 50, 50, 0.30) 0%, transparent 65%);
+
+  /* Image Treatment */
+  --image-filter: saturate(0.15) contrast(1.10) brightness(0.90);
+  --image-overlay: rgba(8, 8, 8, 0.45);
+
+  /* Ghost typography color */
+  --ghost-text: rgba(220, 220, 220, 0.035);
+
+  color-scheme: dark;
+}
+
+/* ────────────────────────────────────────────────────────────
+   04 · CHAMPAGNE / TAUPE / SILVER ("CHAMPAGNE FUTURE")
+   Minimalist luxury, champagne metal, frosted glass, warm silver.
+   ──────────────────────────────────────────────────────────── */
+:root[data-theme="champagne"],
+html[data-theme="champagne"],
+[data-theme="champagne"],
+[data-theme="peach"] {
+  /* Surfaces & Backgrounds */
+  --bg-base: #DDD5CD;
+  --bg-cinematic: #D3C8BE;
+  --bg-elevated: #E5DED7;
+  --surface: #D8CFC7;
+  --surface-subtle: #E5DED7;
+  --surface-card: #EAE3DC;
+
+  /* Liquid Glass System */
+  --bg-glass: rgba(245, 240, 235, 0.75);
+  --bg-glass-light: rgba(182, 155, 120, 0.14);
+  --bg-glass-nav: rgba(240, 234, 227, 0.96);
+  --glass-subtle-bg: rgba(245, 240, 235, 0.55);
+  --glass-subtle-border: rgba(117, 106, 105, 0.14);
+  --glass-medium-bg: rgba(245, 240, 235, 0.75);
+  --glass-medium-border: rgba(197, 169, 130, 0.28);
+  --glass-strong-bg: rgba(250, 246, 242, 0.88);
+  --glass-strong-border: rgba(212, 212, 212, 0.65);
+  --glass-floating-bg: rgba(245, 240, 235, 0.85);
+  --glass-floating-border: rgba(197, 169, 130, 0.38);
+  --glass-floating-shadow: 0 20px 60px rgba(117, 106, 105, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+
+  /* Borders — High Definition */
+  --border-hairline: rgba(75, 62, 60, 0.24);
+  --border-strong: rgba(75, 62, 60, 0.42);
+  --border-accent: rgba(133, 98, 54, 0.55);
+
+  /* Typography — MAXIMUM CONTRAST (Light Mode) */
+  --text-primary: #121110;
+  --text-secondary: #2C2624;
+  --text-muted: #4A3E3C;
+  --text-metadata: #5A4C4A;
+
+  /* Accents — Antique Gold / Rich Bronze (High Legibility) */
+  --accent-primary: #856236;
+  --accent-bright: #9E7745;
+  --accent-deep: #3A2F2D;
+  --accent-highlight: #4A3E3C;
+  --accent-secondary: #6B554E;
+
+  /* Aliases */
+  --accent-gold: var(--accent-primary);
+  --accent-honey: var(--accent-bright);
+  --accent-caramel: var(--accent-secondary);
+  --accent-sand: var(--text-secondary);
+  --accent-sunset: var(--accent-highlight);
+
+  /* Glows & Shadows */
+  --glow-primary: 0 0 60px rgba(182, 155, 120, 0.20);
+  --glow-cinematic: 0 40px 120px rgba(117, 106, 105, 0.15);
+  --shadow-elevated: 0 20px 50px rgba(117, 106, 105, 0.16);
+  --shadow-soft: 0 10px 30px rgba(117, 106, 105, 0.10);
+
+  /* Gradients */
+  --gradient-cta: linear-gradient(135deg, #BDA07A 0%, #A68A64 60%, #8D7F7E 100%);
+  --gradient-gold: var(--gradient-cta);
+  --gradient-gold-text: linear-gradient(135deg, #1A1918 0%, #3D3835 40%, #A68A64 100%);
+  --gradient-progress: linear-gradient(90deg, #6A5F5D, #A68A64, #C8C8C8);
+  --hero-bleed: radial-gradient(circle at 65% 25%, rgba(197, 169, 130, 0.38) 0%, rgba(211, 200, 190, 0.25) 50%, transparent 75%);
+  --hero-bleed-secondary: radial-gradient(circle at 15% 80%, rgba(226, 226, 226, 0.45) 0%, transparent 65%);
+
+  /* Image Treatment */
+  --image-filter: contrast(1.02) saturate(0.92) sepia(0.06);
+  --image-overlay: rgba(221, 213, 205, 0.25);
+
+  /* Ghost typography color */
+  --ghost-text: rgba(117, 106, 105, 0.07);
+
+  color-scheme: light;
+}
+
+/* Typography Families */
+:root {
+  --font-display: 'Fraunces', 'Instrument Serif', Georgia, serif;
+  --font-body: 'Inter', var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Tailwind v4 theme mapping */
+@theme inline {
+  --color-bg: var(--bg-base);
+  --color-cinematic: var(--bg-cinematic);
+  --color-elevated: var(--bg-elevated);
+  --color-surface: var(--surface);
+  --color-glass: var(--bg-glass);
+  --color-glass-light: var(--bg-glass-light);
+  --color-line: var(--border-hairline);
+  --color-line-strong: var(--border-strong);
+  --color-ink: var(--text-primary);
+  --color-ink-secondary: var(--text-secondary);
+  --color-muted: var(--text-muted);
+  --color-metadata: var(--text-metadata);
+  --color-gold: var(--accent-primary);
+  --color-honey: var(--accent-bright);
+  --color-caramel: var(--accent-secondary);
+  --color-sand: var(--text-secondary);
+  --color-sunset: var(--accent-highlight);
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-bright: var(--accent-bright);
+  --color-accent-highlight: var(--accent-highlight);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-btn-ink: #0A0908;
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+/* ────────────────────────────────────────────────────────────
+   GLOBAL STYLES & LIQUID GLASS CLASSES
+   ──────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-anchor: none;
+  background-color: var(--bg-base);
+  transition: background-color 750ms cubic-bezier(0.16, 1, 0.3, 1),
+              color 750ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: clamp(1.0625rem, 1.15vw, 1.15rem);
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  cursor: auto;
+  transition: background-color 750ms cubic-bezier(0.16, 1, 0.3, 1),
+              color 750ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.transition-colors.duration-350 {
+  transition-duration: 350ms;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent-primary) 35%, transparent);
+  color: var(--text-primary);
+}
+
+::placeholder {
+  color: var(--text-muted);
+}
+
+:focus-visible {
+  outline: 1.5px solid var(--accent-primary);
+  outline-offset: 3px;
+  border-radius: 9999px;
+}
+
+/* ---------- Typography styles ---------- */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.text-gradient {
+  background-image: var(--gradient-gold-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Ghost / Watermark Editorial Typography ---------- */
+.ghost-typography {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  white-space: nowrap;
+  color: var(--ghost-text);
+  overflow: hidden;
+  z-index: 0;
+  transition: color 750ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- Cinematic Section Atmosphere ---------- */
+.section-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.section-atmosphere img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: var(--image-filter);
+  opacity: 0.12;
+  transition: filter 750ms ease, opacity 750ms ease;
+}
+
+[data-theme="champagne"] .section-atmosphere img,
+[data-theme="peach"] .section-atmosphere img {
+  opacity: 0.08;
+  filter: contrast(1.02) saturate(0.6) sepia(0.12);
+}
+
+[data-theme="matte-silver"] .section-atmosphere img,
+[data-theme="silver"] .section-atmosphere img {
+  opacity: 0.08;
+  filter: saturate(0) contrast(1.1) brightness(0.7);
+}
+
+.section-atmosphere::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--bg-base) 70%, transparent) 0%,
+    color-mix(in srgb, var(--bg-base) 45%, transparent) 40%,
+    color-mix(in srgb, var(--bg-base) 80%, transparent) 75%,
+    var(--bg-base) 100%
+  );
+}
+
+/* ---------- Liquid Glass Utilities (4 Levels) ---------- */
+.glass-subtle {
+  background-color: var(--glass-subtle-bg);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid var(--glass-subtle-border);
+}
+
+.glass-medium {
+  background-color: var(--glass-medium-bg);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid var(--glass-medium-border);
+}
+
+.glass-strong {
+  background-color: var(--glass-strong-bg);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid var(--glass-strong-border);
+}
+
+.glass-floating {
+  background-color: var(--glass-floating-bg);
+  backdrop-filter: blur(32px) saturate(160%);
+  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  border: 1px solid var(--glass-floating-border);
+  box-shadow: var(--glass-floating-shadow);
+}
+
+/* ---------- Buttons ---------- */
+.btn-gold {
+  background-image: var(--gradient-cta);
+  color: #0A0908;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease-out, filter 180ms ease-out;
+}
+
+.btn-gold:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.3);
+}
+
+.btn-glass {
+  background: var(--bg-glass-light);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-primary);
+  backdrop-filter: blur(16px);
+  transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-glass:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background: var(--bg-glass);
+  transform: translateY(-1px);
+}
+
+/* ---------- Liquid Glass Floating Pill Navbar ---------- */
+.liquid-pill-nav {
+  background: var(--bg-glass-nav);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid var(--border-hairline);
+  box-shadow: var(--shadow-elevated);
+  transform: translateZ(0);
+  transition: background 750ms cubic-bezier(0.16, 1, 0.3, 1),
+              backdrop-filter 750ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 750ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Diagonal subtle light sweep */
+@keyframes pill-sweep {
+  0% {
+    transform: translate3d(-150%, 0, 0);
+  }
+  100% {
+    transform: translate3d(150%, 0, 0);
+  }
+}
+
+.pill-light-sweep {
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 45%,
+    var(--accent-primary) 55%,
+    transparent 100%
+  );
+  animation: pill-sweep 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ---------- Film Grain / Texture Overlay ---------- */
+.cinematic-grain {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  transition: opacity 750ms ease;
+}
+
+[data-theme="champagne"] .cinematic-grain,
+[data-theme="peach"] .cinematic-grain {
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+}
+
+[data-theme="matte-silver"] .cinematic-grain,
+[data-theme="silver"] .cinematic-grain {
+  opacity: 0.04;
+}
+
+/* ---------- Editorial Technical Grid & Atmosphere ---------- */
+.editorial-grid-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  background-size: 64px 64px;
+  background-image: 
+    linear-gradient(to right, var(--border-hairline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-hairline) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, #000 20%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, #000 20%, transparent 85%);
+  opacity: 0.45;
+  transition: opacity 750ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="champagne"] .editorial-grid-bg,
+[data-theme="peach"] .editorial-grid-bg {
+  opacity: 0.35;
+}
+
+[data-theme="matte-silver"] .editorial-grid-bg,
+[data-theme="silver"] .editorial-grid-bg {
+  opacity: 0.40;
+}
+
+.theme-ambient-glow {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  background-image: var(--hero-bleed);
+  opacity: 0.7;
+  filter: blur(90px);
+  transition: opacity 750ms cubic-bezier(0.16, 1, 0.3, 1), background-image 750ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- Theme Image Grading ---------- */
+.theme-image-graded {
+  filter: var(--image-filter);
+  transition: filter 750ms cubic-bezier(0.16, 1, 0.3, 1), transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- Glass Bubble Overlay ---------- */
+.glass-bubble {
+  background: radial-gradient(
+    circle at 35% 30%,
+    rgba(255, 255, 255, 0.25) 0%,
+    var(--accent-primary) 30%,
+    var(--bg-base) 85%
+  );
+  box-shadow:
+    inset 0 0 20px rgba(255, 255, 255, 0.2),
+    0 12px 36px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-hairline);
+  backdrop-filter: blur(8px);
+}
+
+/* ---------- Liquid Glass Sliding Navbar & Cursor Glow ---------- */
+.liquid-glass-nav {
+  background-color: var(--bg-glass-nav);
+  backdrop-filter: blur(32px) saturate(190%);
+  -webkit-backdrop-filter: blur(32px) saturate(190%);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.liquid-nav-sliding-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--accent-primary) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-bright) 35%, transparent);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--accent-primary) 20%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
