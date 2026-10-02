@@ -287,6 +287,8 @@ export function Projects() {
                           variant={project.variant}
                           projectId={project.id}
                           title={project.title}
+                          demoImage={project.demoImage || project.image}
+                          onExpandImage={(img) => setActiveModalImage(img)}
                         />
                       </div>
                     </div>
