@@ -225,7 +225,7 @@ export function Projects() {
                           <span>{project.positioning || "SYSTEM ARCHITECTURE"}</span>
                         </div>
                         <h3
-                          className="font-display text-ink leading-[1.08] break-words"
+                          className="font-display text-ink leading-[1.08] wrap-break-word"
                           style={{
                             fontSize: "clamp(1.75rem, 2.7vw, 2.75rem)",
                             fontWeight: 500,
@@ -287,6 +287,8 @@ export function Projects() {
                           variant={project.variant}
                           projectId={project.id}
                           title={project.title}
+                          demoImage={project.demoImage || project.image}
+                          onExpandImage={(img) => setActiveModalImage(img)}
                         />
                       </div>
                     </div>
@@ -311,7 +313,7 @@ export function Projects() {
 
                       {/* Engineering Highlight Box */}
                       <div
-                        className="rounded-2xl border border-(--accent-primary)/35 bg-(--accent-primary)/8 p-5 font-light text-(--text-primary)"
+                        className="rounded-2xl border border-(--accent-primary)/35 bg-(--accent-primary)/8 p-5 font-light text-ink"
                         style={{
                           fontSize: "clamp(1.02rem, 1.12vw, 1.15rem)",
                           lineHeight: 1.65,

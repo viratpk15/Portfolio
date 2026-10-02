@@ -74,7 +74,7 @@ export function InteractiveAura() {
       >
         <div
           ref={auraRef}
-          className="absolute top-0 left-0 w-[700px] h-[700px] rounded-full will-change-transform opacity-60 mix-blend-screen transition-opacity duration-300"
+          className="absolute top-0 left-0 w-175 h-175 rounded-full will-change-transform opacity-60 mix-blend-screen transition-opacity duration-300"
           style={{
             background:
               "radial-gradient(circle at center, color-mix(in srgb, var(--accent-bright) 16%, transparent) 0%, color-mix(in srgb, var(--accent-primary) 8%, transparent) 40%, transparent 70%)",

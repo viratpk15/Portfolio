@@ -11,6 +11,7 @@ export interface DemoPlaceholderProps {
   title?: string;
   visual?: string;
   demoImage?: string;
+  onExpandImage?: (data: { src: string; title: string }) => void;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -929,10 +930,535 @@ export function ReachInboxVisual() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
+   07 · F1 Live Predictor 2026 — Telemetry Dashboard & Active Aero Engine
+   Top: Active Aero Indicator (X-Mode / Z-Mode) & 350kW MGU-K Hybrid Energy.
+   Left: Telemetry speed curve, live gear/RPM, and animated scan cursor.
+   Right: XGBoost ML Predicted finishing order & probabilities.
+   Bottom: Sector times, circuit minimap lap trace, and Groq AI commentary.
+   ───────────────────────────────────────────────────────────────────────────── */
+export function F1PredictorVisual() {
+  return (
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 800 500"
+      preserveAspectRatio="xMidYMid meet"
+      className="w-full h-full select-none"
+    >
+      <defs>
+        <linearGradient id="f1-speed-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#00F5D4" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#00F5D4" stopOpacity="0.0" />
+        </linearGradient>
+        <pattern id="f1-carbon-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="var(--border-hairline)" strokeWidth="0.5" strokeOpacity="0.25" />
+        </pattern>
+      </defs>
+
+      <rect width="100%" height="100%" fill="url(#f1-carbon-grid)" />
+
+      {/* Top Telemetry HUD Header */}
+      <g transform="translate(30, 24)">
+        <rect width="740" height="42" rx="10" fill="var(--bg-elevated)" stroke="var(--border-hairline)" />
+        <circle cx="20" cy="21" r="5" fill="#FF1801" />
+        <text x="34" y="25" fill="var(--text-primary)" fontFamily="var(--font-mono)" fontSize="11" fontWeight="700" letterSpacing="0.1em">
+          F1 LIVE PREDICTOR 2026 // ACTIVE TELEMETRY
+        </text>
+        <text x="360" y="25" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="10">
+          ROUND 20: MEXICO GP · FASTF1 STREAM
+        </text>
+
+        {/* Dynamic Aero Mode Indicator */}
+        <g transform="translate(565, 8)">
+          <motion.rect
+            width="155"
+            height="26"
+            rx="6"
+            fill="var(--bg-base)"
+            stroke="#00F5D4"
+            strokeWidth="1.5"
+            animate={{ strokeOpacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
+          <circle cx="16" cy="13" r="4" fill="#00F5D4" />
+          <text x="28" y="17" fill="#00F5D4" fontFamily="var(--font-mono)" fontSize="9" fontWeight="700">
+            AERO: X-MODE (LOW DRAG)
+          </text>
+        </g>
+      </g>
+
+      {/* Left Column: Telemetry Speed Trace & Engine Dynamics (x: 30, y: 80, w: 460, h: 250) */}
+      <g transform="translate(30, 80)">
+        <rect width="460" height="250" rx="12" fill="var(--bg-elevated)" stroke="var(--border-hairline)" />
+
+        <text x="20" y="24" fill="var(--text-secondary)" fontFamily="var(--font-mono)" fontSize="10" letterSpacing="0.12em">
+          TELEMETRY SPEED TRACE &amp; 350kW MGU-K BOOST (XGBoost Regressor)
+        </text>
+
+        {/* Speed axes */}
+        <line x1="45" y1="45" x2="45" y2="200" stroke="var(--border-hairline)" strokeWidth="1" />
+        <line x1="45" y1="200" x2="435" y2="200" stroke="var(--border-hairline)" strokeWidth="1" />
+        
+        {/* Speed grid horizontal lines */}
+        <line x1="45" y1="75" x2="435" y2="75" stroke="var(--border-hairline)" strokeDasharray="3 3" strokeOpacity="0.5" />
+        <line x1="45" y1="120" x2="435" y2="120" stroke="var(--border-hairline)" strokeDasharray="3 3" strokeOpacity="0.5" />
+        <line x1="45" y1="160" x2="435" y2="160" stroke="var(--border-hairline)" strokeDasharray="3 3" strokeOpacity="0.5" />
+
+        <text x="12" y="79" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="8">350k</text>
+        <text x="12" y="124" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="8">240k</text>
+        <text x="12" y="164" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="8">120k</text>
+        <text x="12" y="204" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="8">0</text>
+
+        {/* Speed Telemetry Curve (Smooth path with area fill) */}
+        <path
+          d="M 45 180 Q 75 170 100 80 T 160 70 L 190 72 Q 210 75 225 185 T 260 170 T 310 90 T 370 75 T 435 68 L 435 200 L 45 200 Z"
+          fill="url(#f1-speed-grad)"
+        />
+        <path
+          d="M 45 180 Q 75 170 100 80 T 160 70 L 190 72 Q 210 75 225 185 T 260 170 T 310 90 T 370 75 T 435 68"
+          fill="none"
+          stroke="#00F5D4"
+          strokeWidth="2.5"
+        />
+
+        {/* Animated Telemetry Scan Cursor */}
+        <motion.line
+          x1="45"
+          y1="45"
+          x2="45"
+          y2="200"
+          stroke="#FF1801"
+          strokeWidth="2"
+          strokeDasharray="4 2"
+          animate={{ x1: [45, 435, 45], x2: [45, 435, 45] }}
+          transition={{ duration: 4.5, repeat: Infinity, ease: "linear" }}
+        />
+
+        {/* Telemetry live readouts */}
+        <g transform="translate(45, 214)">
+          <rect width="80" height="22" rx="4" fill="var(--bg-base)" stroke="var(--border-hairline)" />
+          <text x="40" y="15" textAnchor="middle" fill="#00F5D4" fontFamily="var(--font-mono)" fontSize="9" fontWeight="700">
+            342 KM/H
+          </text>
+        </g>
+        <g transform="translate(135, 214)">
+          <rect width="80" height="22" rx="4" fill="var(--bg-base)" stroke="var(--border-hairline)" />
+          <text x="40" y="15" textAnchor="middle" fill="var(--text-primary)" fontFamily="var(--font-mono)" fontSize="9">
+            GEAR 8 · 11.8k
+          </text>
+        </g>
+        <g transform="translate(225, 214)">
+          <rect width="95" height="22" rx="4" fill="var(--bg-base)" stroke="var(--border-hairline)" />
+          <text x="47" y="15" textAnchor="middle" fill="#10B981" fontFamily="var(--font-mono)" fontSize="9">
+            350kW MGU-K ON
+          </text>
+        </g>
+        <g transform="translate(330, 214)">
+          <rect width="95" height="22" rx="4" fill="var(--bg-base)" stroke="var(--border-hairline)" />
+          <text x="47" y="15" textAnchor="middle" fill="#A855F7" fontFamily="var(--font-mono)" fontSize="9">
+            DRS OVERRIDE
+          </text>
+        </g>
+      </g>
+
+      {/* Right Column: Live Forecast Paddock & ML Leaderboard (x: 505, y: 80, w: 265, h: 250) */}
+      <g transform="translate(505, 80)">
+        <rect width="265" height="250" rx="12" fill="var(--bg-elevated)" stroke="var(--border-hairline)" />
+
+        <text x="16" y="24" fill="var(--text-secondary)" fontFamily="var(--font-mono)" fontSize="10" letterSpacing="0.12em">
+          PREDICTED FINISH (XGBOOST)
+        </text>
+
+        {/* P1 Driver Row */}
+        <g transform="translate(16, 40)">
+          <rect width="233" height="48" rx="8" fill="var(--bg-base)" stroke="#00F5D4" strokeWidth="1" />
+          <text x="12" y="20" fill="#00F5D4" fontFamily="var(--font-mono)" fontSize="12" fontWeight="700">01</text>
+          <text x="36" y="20" fill="var(--text-primary)" fontFamily="var(--font-mono)" fontSize="11" fontWeight="600">K. ANTONELLI</text>
+          <text x="36" y="36" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="8">MERCEDES F1 2026</text>
+          
+          <rect x="150" y="12" width="72" height="24" rx="4" fill="#00F5D4" fillOpacity="0.12" />
+          <text x="186" y="27" textAnchor="middle" fill="#00F5D4" fontFamily="var(--font-mono)" fontSize="10" fontWeight="700">
+            86.4% WIN
+          </text>
+        </g>
+
+        {/* P2 Driver Row */}
+        <g transform="translate(16, 96)">
+          <rect width="233" height="44" rx="8" fill="var(--bg-base)" stroke="var(--border-hairline)" />
+          <text x="12" y="19" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="11" fontWeight="700">02</text>
+          <text x="36" y="19" fill="var(--text-primary)" fontFamily="var(--font-mono)" fontSize="10" fontWeight="500">M. VERSTAPPEN</text>
+          <text x="36" y="33" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="8">RED BULL RACING</text>
+          
+          <rect x="150" y="10" width="72" height="22" rx="4" fill="var(--bg-elevated)" />
+          <text x="186" y="24" textAnchor="middle" fill="var(--text-secondary)" fontFamily="var(--font-mono)" fontSize="9">
+            71.2% POD
+          </text>
+        </g>
+
+        {/* P3 Driver Row */}
+        <g transform="translate(16, 148)">
+          <rect width="233" height="44" rx="8" fill="var(--bg-base)" stroke="var(--border-hairline)" />
+          <text x="12" y="19" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="11" fontWeight="700">03</text>
+          <text x="36" y="19" fill="var(--text-primary)" fontFamily="var(--font-mono)" fontSize="10" fontWeight="500">G. RUSSELL</text>
+          <text x="36" y="33" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="8">MERCEDES F1 2026</text>
+          
+          <rect x="150" y="10" width="72" height="22" rx="4" fill="var(--bg-elevated)" />
+          <text x="186" y="24" textAnchor="middle" fill="var(--text-secondary)" fontFamily="var(--font-mono)" fontSize="9">
+            64.8% POD
+          </text>
+        </g>
+
+        {/* FastF1 model badge */}
+        <g transform="translate(16, 202)">
+          <rect width="233" height="34" rx="6" fill="var(--bg-base)" stroke="var(--border-hairline)" />
+          <text x="12" y="21" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="8" letterSpacing="0.08em">
+            MODEL: XGBOOST REGRESSOR (CALIBRATED)
+          </text>
+          <circle cx="215" cy="17" r="4" fill="#10B981" />
+        </g>
+      </g>
+
+      {/* Bottom Sector Split Bar (x: 30, y: 345, w: 460, h: 58) */}
+      <g transform="translate(30, 345)">
+        <rect width="460" height="58" rx="10" fill="var(--bg-elevated)" stroke="var(--border-hairline)" />
+        <g transform="translate(20, 14)">
+          <rect width="125" height="30" rx="6" fill="#A855F7" fillOpacity="0.15" stroke="#A855F7" strokeWidth="1" />
+          <text x="10" y="20" fill="#A855F7" fontFamily="var(--font-mono)" fontSize="9" fontWeight="700">SECTOR 1: 27.421s</text>
+        </g>
+        <g transform="translate(165, 14)">
+          <rect width="125" height="30" rx="6" fill="#10B981" fillOpacity="0.15" stroke="#10B981" strokeWidth="1" />
+          <text x="10" y="20" fill="#10B981" fontFamily="var(--font-mono)" fontSize="9" fontWeight="700">SECTOR 2: 38.109s</text>
+        </g>
+        <g transform="translate(310, 14)">
+          <rect width="125" height="30" rx="6" fill="#F59E0B" fillOpacity="0.15" stroke="#F59E0B" strokeWidth="1" />
+          <text x="10" y="20" fill="#F59E0B" fontFamily="var(--font-mono)" fontSize="9" fontWeight="700">SECTOR 3: 24.312s</text>
+        </g>
+      </g>
+
+      {/* Bottom Right: Live Circuit Minimap & Lap Tracker (x: 505, y: 345, w: 265, h: 58) */}
+      <g transform="translate(505, 345)">
+        <rect width="265" height="58" rx="10" fill="var(--bg-elevated)" stroke="var(--border-hairline)" />
+        <path
+          d="M 30 35 L 75 18 L 130 18 L 170 32 L 200 20 L 235 32 L 210 46 L 90 46 Z"
+          fill="none"
+          stroke="var(--border-hairline)"
+          strokeWidth="3"
+        />
+        <motion.circle
+          r="4"
+          fill="#FF1801"
+          animate={{
+            cx: [30, 75, 130, 170, 200, 235, 210, 90, 30],
+            cy: [35, 18, 18, 32, 20, 32, 46, 46, 35],
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+        />
+        <text x="12" y="14" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="8">
+          AUTÓDROMO HNOS RODRÍGUEZ
+        </text>
+      </g>
+
+      {/* Live AI Commentary Ticker at bottom (x: 30, y: 418, w: 740, h: 58) */}
+      <g transform="translate(30, 418)">
+        <rect width="740" height="58" rx="10" fill="var(--bg-elevated)" stroke="#00F5D4" strokeOpacity="0.3" />
+        <g transform="translate(18, 15)">
+          <circle cx="6" cy="12" r="4" fill="#00F5D4" />
+          <text x="18" y="16" fill="#00F5D4" fontFamily="var(--font-mono)" fontSize="10" fontWeight="700">
+            GROQ AI RACE ENGINEER (LLAMA 3 INFERENCE · 185ms):
+          </text>
+        </g>
+        <text x="36" y="44" fill="var(--text-primary)" fontFamily="var(--font-mono)" fontSize="10">
+          &ldquo;Lap 48/57: Telemetry delta shrinking by 0.18s/lap. X-Mode low drag deployed on main straight. Switch to Strat-2.&rdquo;
+        </text>
+      </g>
+    </svg>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   08 · Ancient Script Analyser — Computational Epigraphy AI
+   Top: Epistemic Evidence Framework Pipeline (Levels 1-4).
+   Left: 8-Stage Research Pipeline & Photometric Sharpness Metrics.
+   Center: Stylized Proto-Elamite clay tablet with laser scanner & glyph bounding boxes.
+   Right: Decoded artifact dossier, Proto-Elamite confidence ring, and reconstructed reading.
+   Bottom: Academic peer-review report ticker with MDP corpus citations.
+   ───────────────────────────────────────────────────────────────────────────── */
+export function AncientScriptsVisual() {
+  return (
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 800 500"
+      preserveAspectRatio="xMidYMid meet"
+      className="w-full h-full select-none"
+    >
+      <defs>
+        <linearGradient id="ancient-scan-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.0" />
+          <stop offset="50%" stopColor="#38BDF8" stopOpacity="0.45" />
+          <stop offset="100%" stopColor="#38BDF8" stopOpacity="0.0" />
+        </linearGradient>
+        <linearGradient id="clay-texture" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#1E1A16" />
+          <stop offset="50%" stopColor="#25201A" />
+          <stop offset="100%" stopColor="#191512" />
+        </linearGradient>
+        <pattern id="ancient-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+          <path d="M 24 0 L 0 0 0 24" fill="none" stroke="var(--border-hairline)" strokeWidth="0.5" strokeOpacity="0.2" />
+        </pattern>
+      </defs>
+
+      <rect width="100%" height="100%" fill="url(#ancient-grid)" />
+
+      {/* Top Header: Epistemic Pipeline */}
+      <g transform="translate(30, 24)">
+        <rect width="740" height="42" rx="10" fill="var(--bg-elevated)" stroke="var(--border-hairline)" />
+        <circle cx="20" cy="21" r="5" fill="#E0A838" />
+        <text x="34" y="25" fill="var(--text-primary)" fontFamily="var(--font-mono)" fontSize="11" fontWeight="700" letterSpacing="0.1em">
+          ANCIENT SCRIPTS AI // COMPUTATIONAL EPIGRAPHY
+        </text>
+        <text x="375" y="25" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="10">
+          PROTO-ELAMITE (c. 3100–2900 BCE) · MDP CORPUS
+        </text>
+
+        {/* Evidence Framework Badge */}
+        <g transform="translate(585, 8)">
+          <rect width="135" height="26" rx="6" fill="var(--bg-base)" stroke="#38BDF8" strokeWidth="1.2" />
+          <circle cx="14" cy="13" r="4" fill="#38BDF8" />
+          <text x="24" y="17" fill="#38BDF8" fontFamily="var(--font-mono)" fontSize="9" fontWeight="700">
+            LEVEL 1-4 VERIFIED
+          </text>
+        </g>
+      </g>
+
+      {/* Left Column: 8-Stage Research Pipeline (x: 30, y: 80, w: 200, h: 320) */}
+      <g transform="translate(30, 80)">
+        <rect width="200" height="320" rx="12" fill="var(--bg-elevated)" stroke="var(--border-hairline)" />
+
+        <text x="16" y="24" fill="var(--text-secondary)" fontFamily="var(--font-mono)" fontSize="9" letterSpacing="0.14em">
+          EPIGRAPHIC PIPELINE
+        </text>
+
+        {[
+          { name: "1. CLAHE Normalization", status: "✓ Complete", color: "#10B981" },
+          { name: "2. Laplacian Variance", status: "✓ 94.2% Sharp", color: "#10B981" },
+          { name: "3. Contour Segment.", status: "✓ 9 Bounding", color: "#38BDF8" },
+          { name: "4. 8-Param Topology", status: "✓ Active Match", color: "#38BDF8" },
+          { name: "5. MDP Corpus Search", status: "✓ Attested", color: "#E0A838" },
+          { name: "6. Metrology Syntax", status: "✓ Deciphered", color: "#E0A838" },
+          { name: "7. Peer Dossier Gen.", status: "✓ Ready (MD)", color: "#A855F7" },
+        ].map((step, idx) => (
+          <g key={step.name} transform={`translate(16, ${38 + idx * 39})`}>
+            <rect width="168" height="32" rx="6" fill="var(--bg-base)" stroke="var(--border-hairline)" />
+            <circle cx="12" cy="16" r="3.5" fill={step.color} />
+            <text x="22" y="15" fill="var(--text-primary)" fontFamily="var(--font-mono)" fontSize="8" fontWeight="600">
+              {step.name}
+            </text>
+            <text x="22" y="25" fill={step.color} fontFamily="var(--font-mono)" fontSize="7">
+              {step.status}
+            </text>
+          </g>
+        ))}
+      </g>
+
+      {/* Center Column: Clay Tablet Scan & Morphological Bounding Boxes (x: 245, y: 80, w: 280, h: 320) */}
+      <g transform="translate(245, 80)">
+        <rect width="280" height="320" rx="12" fill="var(--bg-elevated)" stroke="var(--border-hairline)" />
+
+        <text x="16" y="24" fill="var(--text-secondary)" fontFamily="var(--font-mono)" fontSize="9" letterSpacing="0.14em">
+          SOURCE ARTIFACT SCAN (1360 × 1980 PX)
+        </text>
+
+        {/* Stylized Clay Tablet */}
+        <g transform="translate(20, 36)">
+          <rect width="240" height="260" rx="14" fill="url(#clay-texture)" stroke="#E0A838" strokeOpacity="0.4" strokeWidth="1.5" />
+
+          {/* Inscribed strokes */}
+          <path d="M 40 40 L 60 70 M 60 40 L 40 70 M 80 45 L 110 45 L 95 70 Z" stroke="#C49B55" strokeWidth="2" strokeOpacity="0.7" fill="none" />
+          <path d="M 140 40 L 175 40 M 155 40 L 155 80 M 195 50 L 215 50 L 205 75 Z" stroke="#C49B55" strokeWidth="2" strokeOpacity="0.7" fill="none" />
+          <path d="M 40 120 L 70 120 L 55 150 Z M 95 125 L 125 125 M 110 115 L 110 155" stroke="#C49B55" strokeWidth="2" strokeOpacity="0.7" fill="none" />
+          <path d="M 150 125 L 180 145 L 150 165 Z M 195 120 L 215 155 L 195 155" stroke="#C49B55" strokeWidth="2" strokeOpacity="0.7" fill="none" />
+          <path d="M 45 200 L 75 200 L 75 235 M 100 205 L 130 205 L 115 235" stroke="#C49B55" strokeWidth="2" strokeOpacity="0.7" fill="none" />
+          <path d="M 160 200 L 190 230 M 190 200 L 160 230" stroke="#C49B55" strokeWidth="2" strokeOpacity="0.7" fill="none" />
+
+          {/* Bounding Box 1: S1 HORNED_R */}
+          <g transform="translate(32, 32)">
+            <motion.rect
+              width="45"
+              height="48"
+              rx="4"
+              fill="#38BDF8"
+              fillOpacity="0.12"
+              stroke="#38BDF8"
+              strokeWidth="1.2"
+              animate={{ strokeOpacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <rect x="0" y="0" width="38" height="12" fill="#38BDF8" rx="2" />
+            <text x="3" y="9" fill="#000" fontFamily="var(--font-mono)" fontSize="6" fontWeight="700">S1: HORNED_R</text>
+          </g>
+
+          {/* Bounding Box 2: S2 KILLED_COMPLEX */}
+          <g transform="translate(132, 32)">
+            <motion.rect
+              width="50"
+              height="55"
+              rx="4"
+              fill="#34D399"
+              fillOpacity="0.12"
+              stroke="#34D399"
+              strokeWidth="1.2"
+              animate={{ strokeOpacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+            />
+            <rect x="0" y="0" width="48" height="12" fill="#34D399" rx="2" />
+            <text x="3" y="9" fill="#000" fontFamily="var(--font-mono)" fontSize="6" fontWeight="700">S2: KILLED_CMPX</text>
+          </g>
+
+          {/* Bounding Box 3: S3 A2_TALL_MAN */}
+          <g transform="translate(35, 112)">
+            <motion.rect
+              width="45"
+              height="48"
+              rx="4"
+              fill="#E0A838"
+              fillOpacity="0.15"
+              stroke="#E0A838"
+              strokeWidth="1.2"
+              animate={{ strokeOpacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+            />
+            <rect x="0" y="0" width="46" height="12" fill="#E0A838" rx="2" />
+            <text x="3" y="9" fill="#000" fontFamily="var(--font-mono)" fontSize="6" fontWeight="700">S3: A2_TALL_MAN</text>
+          </g>
+
+          {/* Bounding Box 4: S4 CUP_TR4_506 */}
+          <g transform="translate(142, 115)">
+            <motion.rect
+              width="48"
+              height="48"
+              rx="4"
+              fill="#A855F7"
+              fillOpacity="0.15"
+              stroke="#A855F7"
+              strokeWidth="1.2"
+              animate={{ strokeOpacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
+            />
+            <rect x="0" y="0" width="46" height="12" fill="#A855F7" rx="2" />
+            <text x="3" y="9" fill="#fff" fontFamily="var(--font-mono)" fontSize="6" fontWeight="700">S4: CUP_TR4_506</text>
+          </g>
+
+          {/* Photometric Laser Scan Beam */}
+          <motion.rect
+            x="0"
+            width="240"
+            height="18"
+            fill="url(#ancient-scan-grad)"
+            animate={{ y: [0, 242, 0] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </g>
+      </g>
+
+      {/* Right Column: Decoded Dossier & Epigraphic Interpretation (x: 540, y: 80, w: 230, h: 320) */}
+      <g transform="translate(540, 80)">
+        <rect width="230" height="320" rx="12" fill="var(--bg-elevated)" stroke="var(--border-hairline)" />
+
+        <text x="16" y="24" fill="var(--text-secondary)" fontFamily="var(--font-mono)" fontSize="9" letterSpacing="0.14em">
+          DECODED ARTIFACT DOSSIER
+        </text>
+
+        {/* Script Classification Card */}
+        <g transform="translate(16, 38)">
+          <rect width="198" height="66" rx="8" fill="var(--bg-base)" stroke="#38BDF8" strokeWidth="1" />
+          <text x="12" y="20" fill="#38BDF8" fontFamily="var(--font-mono)" fontSize="8">SCRIPT CLASSIFICATION</text>
+          <text x="12" y="38" fill="var(--text-primary)" fontFamily="var(--font-mono)" fontSize="13" fontWeight="700">
+            Proto-Elamite
+          </text>
+          <text x="12" y="54" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="8">
+            Early Bronze Age (c. 3100–2900 BCE)
+          </text>
+
+          {/* Confidence Ring */}
+          <g transform="translate(162, 33)">
+            <circle cx="0" cy="0" r="18" fill="none" stroke="var(--border-hairline)" strokeWidth="3" />
+            <circle cx="0" cy="0" r="18" fill="none" stroke="#38BDF8" strokeWidth="3" strokeDasharray="97 100" strokeLinecap="round" />
+            <text x="0" y="4" textAnchor="middle" fill="#38BDF8" fontFamily="var(--font-mono)" fontSize="8" fontWeight="700">86%</text>
+          </g>
+        </g>
+
+        {/* Reconstructed Reading Card */}
+        <g transform="translate(16, 114)">
+          <rect width="198" height="98" rx="8" fill="var(--bg-base)" stroke="var(--border-hairline)" />
+          <text x="12" y="18" fill="#E0A838" fontFamily="var(--font-mono)" fontSize="8" fontWeight="600">
+            RECONSTRUCTED READING (TOP CANDIDATE)
+          </text>
+          <text x="12" y="36" fill="var(--text-primary)" fontFamily="var(--font-mono)" fontSize="9" fontWeight="500">
+            &ldquo;Belonging to the High Administrator
+          </text>
+          <text x="12" y="50" fill="var(--text-primary)" fontFamily="var(--font-mono)" fontSize="9" fontWeight="500">
+            (Paramount Ruler), allocation of
+          </text>
+          <text x="12" y="64" fill="var(--text-primary)" fontFamily="var(--font-mono)" fontSize="9" fontWeight="500">
+            livestock from the Central Domain.&rdquo;
+          </text>
+          <text x="12" y="84" fill="#10B981" fontFamily="var(--font-mono)" fontSize="8">
+            Confidence: 65% · Metrology: Decimal
+          </text>
+        </g>
+
+        {/* Sign Specification Card */}
+        <g transform="translate(16, 222)">
+          <rect width="198" height="84" rx="8" fill="var(--bg-base)" stroke="var(--border-hairline)" />
+          <text x="12" y="18" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="8">
+            SPECIMEN A1 // HONORIFIC STAR
+          </text>
+          <text x="12" y="34" fill="var(--text-secondary)" fontFamily="var(--font-mono)" fontSize="9" fontWeight="600">
+            M001_A · Logogram (4,806 tokens)
+          </text>
+
+          {/* 8-parameter descriptor bar */}
+          <g transform="translate(12, 44)">
+            <rect width="174" height="6" rx="3" fill="var(--border-hairline)" />
+            <motion.rect
+              width="145"
+              height="6"
+              rx="3"
+              fill="#E0A838"
+              animate={{ width: [120, 145, 120] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            />
+          </g>
+          <text x="12" y="66" fill="var(--text-muted)" fontFamily="var(--font-mono)" fontSize="7">
+            Corpus Reference: H65[_A + N555_7 + M035_7]
+          </text>
+        </g>
+      </g>
+
+      {/* Bottom Peer Review & Decrypted Report Strip (x: 30, y: 415, w: 740, h: 60) */}
+      <g transform="translate(30, 415)">
+        <rect width="740" height="60" rx="10" fill="var(--bg-elevated)" stroke="#E0A838" strokeOpacity="0.35" />
+        <g transform="translate(20, 16)">
+          <circle cx="6" cy="12" r="4" fill="#E0A838" />
+          <text x="18" y="16" fill="#E0A838" fontFamily="var(--font-mono)" fontSize="10" fontWeight="700">
+            DECRYPTED RESEARCH REPORT // LEVEL 1-4 SCIENTIFIC EVIDENCE
+          </text>
+        </g>
+        <text x="38" y="44" fill="var(--text-primary)" fontFamily="var(--font-mono)" fontSize="9.5">
+          Level 1: 9 Candidate Graphemes · Level 2: Proto-Elamite (86.2% Softmax) · Level 3: Susa / MDP Attestation · Level 4: Administrative Ledger
+        </text>
+      </g>
+    </svg>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
    Main DemoPlaceholder component:
-   - Accepts variant, projectId, imageSrc, title.
-   - If imageSrc is passed and hasn't failed, renders next/image.
-   - On error or if missing, renders the bespoke project SVG visual.
+   - Accepts variant, projectId, imageSrc, title, demoImage, onExpandImage.
+   - Provides an interactive toggle between Live Animated HUD simulation and authentic screenshot.
+   - When in screenshot mode, supports fullscreen inspection via onExpandImage.
+   - On error or fallback, renders the bespoke project SVG visual.
    ───────────────────────────────────────────────────────────────────────────── */
 export function DemoPlaceholder({
   variant,
@@ -941,8 +1467,10 @@ export function DemoPlaceholder({
   title,
   visual,
   demoImage,
+  onExpandImage,
 }: DemoPlaceholderProps) {
   const [imageError, setImageError] = useState(false);
+  const [viewMode, setViewMode] = useState<"interactive" | "screenshot">("interactive");
   const effectiveVariant = (variant || projectId || visual || "").toLowerCase();
   const effectiveImage = imageSrc || demoImage;
 
@@ -967,52 +1495,132 @@ export function DemoPlaceholder({
       case "reachinbox":
       case "reachinbox-scheduler":
         return <ReachInboxVisual />;
+      case "f1-predictor":
+      case "f1-race-predictor":
+      case "f1-predictor-2026":
+      case "f1-live-predictor":
+        return <F1PredictorVisual />;
+      case "ancient-scripts-ai":
+      case "ancient-script-analyser":
+      case "ancient-scripts":
+        return <AncientScriptsVisual />;
       default:
         return <LisaVisual />;
     }
   };
 
-  const projectName = title || (
-    effectiveVariant === "lisa-ai" ? "Lisa AIOS" :
-    effectiveVariant === "neuronet-ai" ? "NeuroNet AI" :
-    effectiveVariant === "neuralworkspace" ? "NeuralWorkspace.ai" :
-    effectiveVariant === "aml-investigator" ? "AML Agentic Investigator" :
-    effectiveVariant === "neurosim-lab" ? "NeuroSim Lab" :
-    effectiveVariant === "reachinbox" ? "ReachInbox Scheduler" : "System"
-  );
+  const projectName =
+    title ||
+    (effectiveVariant === "lisa-ai"
+      ? "Lisa AIOS"
+      : effectiveVariant === "neuronet-ai"
+      ? "NeuroNet AI"
+      : effectiveVariant === "neuralworkspace"
+      ? "NeuralWorkspace.ai"
+      : effectiveVariant === "aml-investigator"
+      ? "AML Agentic Investigator"
+      : effectiveVariant === "neurosim-lab"
+      ? "NeuroSim Lab"
+      : effectiveVariant === "reachinbox"
+      ? "ReachInbox Scheduler"
+      : effectiveVariant.includes("f1")
+      ? "F1 Live Predictor 2026"
+      : effectiveVariant.includes("ancient")
+      ? "Ancient Script Analyser"
+      : "System");
+
+  const hasScreenshot = Boolean(effectiveImage && !imageError);
 
   return (
     <div
-      className="relative w-full h-full min-h-65 md:min-h-120 rounded-3xl overflow-hidden border border-(--accent-primary)/30 flex items-center justify-center shadow-2xl"
+      className="relative w-full h-full min-h-65 md:min-h-120 rounded-3xl overflow-hidden border border-(--accent-primary)/30 flex items-center justify-center shadow-2xl group"
       style={{
         backgroundColor: "var(--bg-glass)",
         background:
           "radial-gradient(ellipse at 50% 45%, color-mix(in srgb, var(--accent-primary) 12%, transparent), transparent 75%), var(--bg-glass)",
       }}
     >
-      {/* If real image exists and has not failed, show Next.js Image with fallback */}
-      {effectiveImage && !imageError ? (
-        <Image
-          src={effectiveImage}
-          alt={`${projectName} interface`}
-          fill
-          sizes="(max-width: 1024px) 95vw, 650px"
-          className="object-cover object-top transition-transform duration-700 hover:scale-[1.02]"
-          onError={() => setImageError(true)}
-          priority
-        />
+      {/* Visual content: either Screenshot or Interactive Animated HUD */}
+      {hasScreenshot && viewMode === "screenshot" ? (
+        <div
+          className="relative w-full h-full cursor-zoom-in"
+          onClick={() => {
+            if (onExpandImage && effectiveImage) {
+              onExpandImage({ src: effectiveImage, title: projectName });
+            }
+          }}
+        >
+          <Image
+            src={effectiveImage!}
+            alt={`${projectName} interface`}
+            fill
+            sizes="(max-width: 1024px) 95vw, 650px"
+            className="object-cover object-top transition-transform duration-700 hover:scale-[1.02]"
+            onError={() => setImageError(true)}
+            priority
+          />
+        </div>
       ) : (
         renderVisual()
       )}
 
-      {/* Required caption at bottom-left: "<PROJECT NAME> — LIVE PREVIEW" in --text-metadata */}
+      {/* Top Controls: Interactive HUD vs Screenshot Toggle & Fullscreen Inspect */}
+      {hasScreenshot && (
+        <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
+          {viewMode === "screenshot" && onExpandImage && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onExpandImage({ src: effectiveImage!, title: projectName });
+              }}
+              className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-line bg-elevated/90 font-mono text-[11px] uppercase tracking-wider text-muted hover:text-(--accent-primary) backdrop-blur-md shadow-md transition-colors"
+            >
+              <span>Inspect</span>
+            </button>
+          )}
+
+          <div className="flex items-center rounded-full border border-line bg-elevated/90 p-1 backdrop-blur-md shadow-lg">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setViewMode("interactive");
+              }}
+              className={`px-3 py-1 rounded-full font-mono text-[11px] uppercase tracking-wider transition-all duration-200 ${
+                viewMode === "interactive"
+                  ? "bg-(--accent-primary) text-ink font-semibold shadow-sm"
+                  : "text-muted hover:text-ink"
+              }`}
+            >
+              ⚡ Live HUD
+            </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setViewMode("screenshot");
+              }}
+              className={`px-3 py-1 rounded-full font-mono text-[11px] uppercase tracking-wider transition-all duration-200 ${
+                viewMode === "screenshot"
+                  ? "bg-(--accent-primary) text-ink font-semibold shadow-sm"
+                  : "text-muted hover:text-ink"
+              }`}
+            >
+              🖼️ Screenshot
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Required caption at bottom-left: "<PROJECT NAME> — LIVE PREVIEW / SIMULATION" */}
       <div className="pointer-events-none absolute bottom-4 left-6 z-10 flex items-center gap-2 rounded-full border border-line bg-elevated/85 px-3.5 py-1.5 backdrop-blur-md">
         <span className="h-1.5 w-1.5 rounded-full bg-(--accent-primary) animate-pulse" />
         <span
           className="font-mono text-xs uppercase tracking-[0.22em]"
           style={{ color: "var(--text-metadata, var(--text-muted))" }}
         >
-          {projectName} — LIVE PREVIEW
+          {projectName} — {hasScreenshot && viewMode === "screenshot" ? "SYSTEM INTERFACE" : "LIVE SIMULATION"}
         </span>
       </div>
     </div>

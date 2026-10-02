@@ -32,7 +32,7 @@ export const aboutParagraphs: string[] = [
 /** Metric cards displayed in the About section. */
 export const aboutMetrics = [
   { id: "cgpa", value: "9.33", label: "CGPA", suffix: "" },
-  { id: "systems", value: "7", label: "AI Systems Built", suffix: "+" },
+  { id: "systems", value: "8", label: "AI Systems Built", suffix: "+" },
   { id: "specialization", value: "AI/ML", label: "Specialization", suffix: "" },
   { id: "curiosity", value: "\u221E", label: "Things to Build", suffix: "" },
 ] as const;
